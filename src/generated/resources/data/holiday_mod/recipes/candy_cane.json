@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    "  #"
+  ],
+  "result": {
+    "item": "holiday_mod:candy_cane"
+  },
+  "show_notification": true
+}

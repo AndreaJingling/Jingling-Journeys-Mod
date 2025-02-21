@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "holiday_mod:item/example_wrapped_candy"
+  }
+}
