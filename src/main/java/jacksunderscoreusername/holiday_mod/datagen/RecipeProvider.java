@@ -1,7 +1,6 @@
 package jacksunderscoreusername.holiday_mod.datagen;
 
 import jacksunderscoreusername.holiday_mod.Items;
-import jacksunderscoreusername.holiday_mod.Main;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
