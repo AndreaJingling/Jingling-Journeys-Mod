@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+// The sharpened variant of the candy cane, can be obtained by eating a candy cane.
 public class SharpenedCandyCane extends Item {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
@@ -25,6 +26,7 @@ public class SharpenedCandyCane extends Item {
         this.defaultModifiers = builder.build();
     }
 
+    // I have the properties defined here for continuity.
     public static Properties getProperties() {
         return new Properties().food((new FoodProperties.Builder()).nutrition(4).saturationMod(1.2F).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10 * 20, 1), 1.0F).alwaysEat().build());
     }

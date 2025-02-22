@@ -16,10 +16,12 @@ public class CandyCane extends Item {
         super(pProperties);
     }
 
+    // I have the properties defined here for continuity.
     public static Item.Properties getProperties() {
         return new Item.Properties().food((new FoodProperties.Builder()).nutrition(4).saturationMod(1.2F).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10 * 20, 1), 1.0F).alwaysEat().build());
     }
 
+    // If the player is not in creative it consumes the item and gives them the sharpened variant.
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
         ItemStack newStack = super.finishUsingItem(stack, level, livingEntity);

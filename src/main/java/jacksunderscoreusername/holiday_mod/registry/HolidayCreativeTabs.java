@@ -15,6 +15,7 @@ public class HolidayCreativeTabs {
                     output.accept(item.get());
             }).build());
 
+    // Used to load this class at the needed time from main.
     public static void init() {
     }
 }
