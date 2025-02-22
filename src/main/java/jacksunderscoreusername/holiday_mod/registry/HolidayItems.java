@@ -1,5 +1,6 @@
-package jacksunderscoreusername.holiday_mod;
+package jacksunderscoreusername.holiday_mod.registry;
 
+import jacksunderscoreusername.holiday_mod.Main;
 import jacksunderscoreusername.holiday_mod.candies.CandyCane;
 import jacksunderscoreusername.holiday_mod.candies.SharpenedCandyCane;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.function.Function;
 
-public class Items {
+public class HolidayItems {
     public static final ArrayList<RegistryObject<Item>> ALL_ITEMS = new ArrayList<>();
 
     public static final RegistryObject<Item> EXAMPLE_GUMMY_CANDY = registerSimpleCandy("example_gummy_candy", () -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10 * 20, 1));
