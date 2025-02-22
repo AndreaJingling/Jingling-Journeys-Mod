@@ -1,6 +1,6 @@
 package jacksunderscoreusername.holiday_mod.datagen;
 
-import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
+import jacksunderscoreusername.holiday_mod.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -10,26 +10,26 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class HolidayRecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
-    public HolidayRecipeProvider(PackOutput pOutput) {
+public class ModRecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
+    public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, HolidayItems.CANDY_CANE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CANDY_CANE.get())
                 .pattern(" # ")
                 .pattern("# #")
                 .pattern("  #")
                 .define('#', net.minecraft.world.item.Items.SUGAR)
                 .unlockedBy(getHasName(net.minecraft.world.item.Items.SUGAR), net.minecraft.data.recipes.RecipeProvider.has(net.minecraft.world.item.Items.SUGAR))
                 .save(writer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HolidayItems.EXAMPLE_GUMMY_CANDY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.EXAMPLE_GUMMY_CANDY.get())
                 .requires(net.minecraft.world.item.Items.SUGAR)
                 .requires(net.minecraft.world.item.Items.SUGAR)
                 .unlockedBy(getHasName(net.minecraft.world.item.Items.SUGAR), net.minecraft.data.recipes.RecipeProvider.has(net.minecraft.world.item.Items.SUGAR))
                 .save(writer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HolidayItems.EXAMPLE_WRAPPED_CANDY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.EXAMPLE_WRAPPED_CANDY.get())
                 .requires(net.minecraft.world.item.Items.SUGAR)
                 .requires(net.minecraft.world.item.Items.PAPER)
                 .unlockedBy(getHasName(net.minecraft.world.item.Items.SUGAR), net.minecraft.data.recipes.RecipeProvider.has(net.minecraft.world.item.Items.SUGAR))

@@ -1,8 +1,9 @@
 package jacksunderscoreusername.holiday_mod;
 
-import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
-import jacksunderscoreusername.holiday_mod.registry.HolidayCreativeTabs;
-import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
+import jacksunderscoreusername.holiday_mod.loot.ModLootModifiers;
+import jacksunderscoreusername.holiday_mod.registry.ModBlocks;
+import jacksunderscoreusername.holiday_mod.registry.ModCreativeTabs;
+import jacksunderscoreusername.holiday_mod.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,9 +44,9 @@ public class Main {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
 
     static {
-        HolidayItems.init();
-        HolidayBlocks.init();
-        HolidayCreativeTabs.init();
+        ModItems.init();
+        ModBlocks.init();
+        ModCreativeTabs.init();
     }
 
     public Main(FMLJavaModLoadingContext context) {
@@ -67,9 +68,12 @@ public class Main {
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
+        // Register the loot modifiers for changing existing loot pools.
+        ModLootModifiers.register(modEventBus);
+
         // Add all the candies to the wandering trader's loot pool.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, WandererTradesEvent.class, event -> {
-            for (RegistryObject<Item> item : HolidayItems.ALL_CANDIES)
+            for (RegistryObject<Item> item : ModItems.ALL_CANDIES)
                 event.getGenericTrades().add(new BasicItemListing(2, new ItemStack(item.get(), 1), 5, 10));
         });
     }

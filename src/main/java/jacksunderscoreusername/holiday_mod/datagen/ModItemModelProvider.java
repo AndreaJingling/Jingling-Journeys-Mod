@@ -1,7 +1,7 @@
 package jacksunderscoreusername.holiday_mod.datagen;
 
 import jacksunderscoreusername.holiday_mod.Main;
-import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
+import jacksunderscoreusername.holiday_mod.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -10,17 +10,17 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
-public class HolidayItemModelProvider extends ItemModelProvider {
-    public HolidayItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class ModItemModelProvider extends ItemModelProvider {
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Main.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
-        simpleItem(HolidayItems.EXAMPLE_GUMMY_CANDY);
-        simpleItem(HolidayItems.EXAMPLE_WRAPPED_CANDY);
-        simpleItem(HolidayItems.CANDY_CANE);
-        simpleItem(HolidayItems.SHARPENED_CANDY_CANE);
+        simpleItem(ModItems.EXAMPLE_GUMMY_CANDY);
+        simpleItem(ModItems.EXAMPLE_WRAPPED_CANDY);
+        simpleItem(ModItems.CANDY_CANE);
+        simpleItem(ModItems.SHARPENED_CANDY_CANE);
     }
 
     // HELPER METHODS

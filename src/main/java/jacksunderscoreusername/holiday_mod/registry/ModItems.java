@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.function.Function;
 
-public class HolidayItems {
+public class ModItems {
     // This is all the "candy" items that will be added to loot pools and the wandering trader's trade pool.
     public static final ArrayList<RegistryObject<Item>> ALL_CANDIES = new ArrayList<>();
     // Where this is just ALL the items, and is used to add everything to the creative tab.

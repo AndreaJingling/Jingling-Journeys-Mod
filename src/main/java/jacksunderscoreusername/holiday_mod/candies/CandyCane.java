@@ -1,6 +1,6 @@
 package jacksunderscoreusername.holiday_mod.candies;
 
-import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
+import jacksunderscoreusername.holiday_mod.registry.ModItems;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +25,6 @@ public class CandyCane extends Item {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
         ItemStack newStack = super.finishUsingItem(stack, level, livingEntity);
-        return (livingEntity instanceof Player player && player.getAbilities().instabuild) ? newStack : HolidayItems.SHARPENED_CANDY_CANE.get().getDefaultInstance();
+        return (livingEntity instanceof Player player && player.getAbilities().instabuild) ? newStack : ModItems.SHARPENED_CANDY_CANE.get().getDefaultInstance();
     }
 }
