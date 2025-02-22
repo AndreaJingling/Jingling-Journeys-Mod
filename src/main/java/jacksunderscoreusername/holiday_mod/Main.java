@@ -1,5 +1,8 @@
 package jacksunderscoreusername.holiday_mod;
 
+import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
+import jacksunderscoreusername.holiday_mod.registry.HolidayCreativeTabs;
+import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,8 +44,9 @@ public class Main {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
 
     static {
-        Items.init();
-        CreativeTab.init();
+        HolidayItems.init();
+        HolidayBlocks.init();
+        HolidayCreativeTabs.init();
     }
 
     public Main(FMLJavaModLoadingContext context) {
@@ -64,30 +68,20 @@ public class Main {
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-
+        // Add all the candies to the wandering trader's loot pool
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, WandererTradesEvent.class, event -> {
-            for (RegistryObject<Item> item : Items.ALL_ITEMS)
+            for (RegistryObject<Item> item : HolidayItems.ALL_CANDIES)
                 event.getGenericTrades().add(new BasicItemListing(2, new ItemStack(item.get(), 1), 5, 10));
         });
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -95,8 +89,6 @@ public class Main {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }

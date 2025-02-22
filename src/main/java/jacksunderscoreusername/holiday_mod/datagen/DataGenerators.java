@@ -3,6 +3,7 @@ package jacksunderscoreusername.holiday_mod.datagen;
 import jacksunderscoreusername.holiday_mod.Main;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +14,12 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(event.includeServer(), new RecipeProvider(packOutput));
+        generator.addProvider(event.includeServer(), new HolidayRecipeProvider(packOutput));
+        generator.addProvider(event.includeServer(), HolidayLootTableProvider.create(packOutput));
+
+        generator.addProvider(event.includeClient(), new HolidayItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new HolidayBlockStateProvider(packOutput, existingFileHelper));
     }
 }
