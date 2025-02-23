@@ -1,6 +1,7 @@
 package jacksunderscoreusername.holiday_mod.datagen.loot;
 
 import jacksunderscoreusername.holiday_mod.Main;
+import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -17,7 +18,7 @@ public class HolidayBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-
+        drop(HolidayBlocks.SLEIGH_CONSTRUCTION_TABLE);
     }
 
     @Override

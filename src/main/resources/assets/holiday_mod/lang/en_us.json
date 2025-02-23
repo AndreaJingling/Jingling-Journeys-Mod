@@ -3,5 +3,7 @@
   "item.holiday_mod.candy_cane": "Candy Cane",
   "item.holiday_mod.sharpened_candy_cane": "Sharpened Candy Cane",
   "item.holiday_mod.example_gummy_candy": "Example Gummy Candy",
-  "item.holiday_mod.example_wrapped_candy": "Example Wrapped Candy"
+  "item.holiday_mod.example_wrapped_candy": "Example Wrapped Candy",
+
+  "container.holiday_mod.sleigh_construction_table": "Sleigh Construction Table"
 }

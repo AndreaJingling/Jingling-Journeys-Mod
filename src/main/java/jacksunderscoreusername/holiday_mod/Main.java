@@ -1,14 +1,17 @@
 package jacksunderscoreusername.holiday_mod;
 
-import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
-import jacksunderscoreusername.holiday_mod.registry.HolidayCreativeTabs;
-import jacksunderscoreusername.holiday_mod.registry.HolidayItems;
+import jacksunderscoreusername.holiday_mod.registry.*;
+import jacksunderscoreusername.holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstructionTableScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -38,11 +41,23 @@ public class Main
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MOD_ID);
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "holiday_mod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
+    // Create a Deferred Register to hold BlockEntities (BlockEntityType) which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Main.MOD_ID);
+    // Create a Deferred Register to hold Menus (MenuTypes) which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Main.MOD_ID);
+    // Create a Deferred Register to hold Recipes (RecipeSerializer) which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MOD_ID);
+    // Create a Deferred Register to hold Recipes Types which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, Main.MOD_ID);
 
     static {
         HolidayItems.init();
         HolidayBlocks.init();
+        HolidayBlockEntities.init();
         HolidayCreativeTabs.init();
+        HolidayMenuTypes.init();
+        ModRecipes.init();
+        ModRecipeTypes.init();
     }
 
     public Main(FMLJavaModLoadingContext context)
@@ -58,6 +73,14 @@ public class Main
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so block entities get registered
+        BLOCK_ENTITIES.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so menu types get registered
+        MENUS.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so recipes get registered
+        RECIPES.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so recipe types get registered
+        RECIPE_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -84,6 +107,7 @@ public class Main
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            MenuScreens.register(HolidayMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU.get(), SleighConstructionTableScreen::new);
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
