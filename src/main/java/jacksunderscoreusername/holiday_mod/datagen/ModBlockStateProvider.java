@@ -1,7 +1,7 @@
 package jacksunderscoreusername.holiday_mod.datagen;
 
 import jacksunderscoreusername.holiday_mod.Main;
-import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
+import jacksunderscoreusername.holiday_mod.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockItem(HolidayBlocks.SLEIGH_CONSTRUCTION_TABLE);
+        blockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
     }
 
     // HELPER METHODS

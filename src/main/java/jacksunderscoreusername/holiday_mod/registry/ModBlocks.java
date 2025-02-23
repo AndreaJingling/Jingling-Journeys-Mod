@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 import static jacksunderscoreusername.holiday_mod.Main.BLOCKS;
 
-public class HolidayBlocks {
+public class ModBlocks {
 
     public static final RegistryObject<Block> SLEIGH_CONSTRUCTION_TABLE = registerBlock("sleigh_construction_table", () -> new SleighConstructionTableBlock(BlockBehaviour.Properties.of()));
 

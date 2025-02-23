@@ -1,10 +1,9 @@
 package jacksunderscoreusername.holiday_mod.registry.block.sleighConstructionTable.screen;
 
-import jacksunderscoreusername.holiday_mod.registry.HolidayBlocks;
-import jacksunderscoreusername.holiday_mod.registry.HolidayMenuTypes;
+import jacksunderscoreusername.holiday_mod.registry.ModBlocks;
+import jacksunderscoreusername.holiday_mod.registry.ModMenuTypes;
 import jacksunderscoreusername.holiday_mod.registry.block.sleighConstructionTable.SleighConstructionTableBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class SleighConstructionTableMenu extends AbstractContainerMenu {
     public final SleighConstructionTableBlockEntity blockEntity;
@@ -25,7 +23,7 @@ public class SleighConstructionTableMenu extends AbstractContainerMenu {
     }
 
     public SleighConstructionTableMenu(int pContainerID, Inventory inventory, BlockEntity entity, ContainerData data) {
-        super(HolidayMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU.get(), pContainerID);
+        super(ModMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU.get(), pContainerID);
         checkContainerSize(inventory, 19);
         blockEntity = ((SleighConstructionTableBlockEntity) entity);
         this.level = inventory.player.level();
@@ -92,7 +90,7 @@ public class SleighConstructionTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, HolidayBlocks.SLEIGH_CONSTRUCTION_TABLE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.SLEIGH_CONSTRUCTION_TABLE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

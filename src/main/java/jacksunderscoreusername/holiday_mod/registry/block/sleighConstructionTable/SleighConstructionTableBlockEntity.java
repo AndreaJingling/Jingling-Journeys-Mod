@@ -1,8 +1,7 @@
 package jacksunderscoreusername.holiday_mod.registry.block.sleighConstructionTable;
 
-import jacksunderscoreusername.holiday_mod.Main;
 import jacksunderscoreusername.holiday_mod.recipies.SleighConstructionTableRecipe;
-import jacksunderscoreusername.holiday_mod.registry.HolidayBlockEntities;
+import jacksunderscoreusername.holiday_mod.registry.ModBlockEntities;
 import jacksunderscoreusername.holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstructionTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,13 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -63,7 +59,7 @@ public class SleighConstructionTableBlockEntity extends BlockEntity implements M
     }
 
     public SleighConstructionTableBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(HolidayBlockEntities.SLEIGH_CONSTRUCTION_TABLE_BE.get(), pPos, pBlockState);
+        super(ModBlockEntities.SLEIGH_CONSTRUCTION_TABLE_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
             @Override
 
