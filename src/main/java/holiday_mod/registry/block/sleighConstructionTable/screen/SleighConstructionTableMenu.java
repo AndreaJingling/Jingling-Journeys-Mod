@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class SleighConstructionTableMenu extends AbstractContainerMenu {
     public final SleighConstructionTableBlockEntity blockEntity;
     private final Level level;
+    @SuppressWarnings("unused")
     public final ContainerData data;
 
     public SleighConstructionTableMenu(int pContainerId, Inventory inventory, FriendlyByteBuf extraData) {

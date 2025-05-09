@@ -13,7 +13,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder exampleGummyCandy;
     private ItemModelBuilder exampleWrappedCandy;
-    private ItemModelBuilder candyCane;
     private ItemModelBuilder sharpenedCandyCane;
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -24,7 +23,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         exampleGummyCandy = simpleItem(ModItems.EXAMPLE_GUMMY_CANDY);
         exampleWrappedCandy = simpleItem(ModItems.EXAMPLE_WRAPPED_CANDY);
-        candyCane = simpleItem(ModItems.CANDY_CANE);
         sharpenedCandyCane = simpleItem(ModItems.SHARPENED_CANDY_CANE);
     }
 
@@ -44,11 +42,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     @SuppressWarnings("unused")
     public ItemModelBuilder getExampleWrappedCandy() {
         return exampleWrappedCandy;
-    }
-
-    @SuppressWarnings("unused")
-    public ItemModelBuilder getCandyCane() {
-        return candyCane;
     }
 
     @SuppressWarnings("unused")

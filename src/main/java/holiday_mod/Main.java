@@ -6,6 +6,8 @@ import holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstruct
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -49,6 +51,9 @@ public class Main {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "holiday_mod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
+    // Create a Deferred Register to hold EntityTypes which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Main.MOD_ID);
     // Create a Deferred Register to hold BlockEntities (BlockEntityType) which will all be registered under the "holiday_mod" namespace
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Main.MOD_ID);
@@ -61,15 +66,20 @@ public class Main {
     // Create a Deferred Register to hold Recipes Types which will all be registered under the "holiday_mod" namespace
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
             DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, Main.MOD_ID);
+    // Create a Deferred Register to hold Sound Events which will all be registered under the "holiday_mod" namespace
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Main.MOD_ID);
 
     static {
         ModItems.init();
         ModBlocks.init();
         ModBlockEntities.init();
         ModCreativeTabs.init();
+        ModEntityTypes.init();
         ModMenuTypes.init();
         ModRecipes.init();
         ModRecipeTypes.init();
+        ModSoundEvents.init();
     }
 
     public Main (FMLJavaModLoadingContext context) {
@@ -84,6 +94,8 @@ public class Main {
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so entity types get registered
+        ENTITY_TYPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so block entities get registered
         BLOCK_ENTITIES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so menu types get registered
@@ -92,6 +104,8 @@ public class Main {
         RECIPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so recipe types get registered
         RECIPE_TYPES.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so sound events get registered
+        SOUND_EVENTS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -111,8 +125,8 @@ public class Main {
         });
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
+    private void commonSetup(@SuppressWarnings("unused") final FMLCommonSetupEvent event) {
+        LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

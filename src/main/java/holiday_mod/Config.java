@@ -34,6 +34,7 @@ public class Config
 
     public static int magicNumber;
     public static String magicNumberIntroduction;
+    @SuppressWarnings("unused")
     public static Set<Item> items;
 
     private static boolean validateItemName(final Object obj)
