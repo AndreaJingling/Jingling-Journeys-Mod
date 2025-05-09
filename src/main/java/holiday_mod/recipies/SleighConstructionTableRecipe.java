@@ -101,9 +101,6 @@ public class SleighConstructionTableRecipe implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<SleighConstructionTableRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        @SuppressWarnings("unused")
-        public static final ResourceLocation ID =
-                ResourceLocation.tryBuild(Main.MOD_ID, "sleigh_constructing");
 
         @Override
         public @NotNull SleighConstructionTableRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {

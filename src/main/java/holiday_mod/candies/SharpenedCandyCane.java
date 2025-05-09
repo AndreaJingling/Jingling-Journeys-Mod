@@ -44,8 +44,7 @@ public class SharpenedCandyCane extends Item {
     }
 
     public boolean hurtEnemy(ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
-        pStack.hurtAndBreak(0, pAttacker, (p_43296_) -> {
-        });
+        pStack.hurtAndBreak(0, pAttacker, (p_43296_) -> {});
         return true;
     }
 

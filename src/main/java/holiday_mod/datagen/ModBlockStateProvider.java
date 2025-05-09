@@ -5,7 +5,7 @@ import holiday_mod.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -16,13 +16,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
+        translucentBlockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
     }
 
     // HELPER METHODS
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings("unused")
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private void translucentBlockItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(), ((BlockModelBuilder) cubeAll(blockRegistryObject.get()))
+                .renderType("translucent"));
     }
 
     @SuppressWarnings("unused")

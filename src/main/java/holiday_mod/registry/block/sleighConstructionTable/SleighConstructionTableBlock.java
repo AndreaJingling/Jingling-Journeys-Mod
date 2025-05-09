@@ -2,11 +2,13 @@ package holiday_mod.registry.block.sleighConstructionTable;
 
 import holiday_mod.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
@@ -94,5 +97,25 @@ public class SleighConstructionTableBlock extends BaseEntityBlock {
         return createTickerHelper(pBlockEntityType, ModBlockEntities.SLEIGH_CONSTRUCTION_TABLE_BE.get(),
                 (pLevel1, pPos, pState1,
                  pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean skipRendering(@NotNull BlockState pState, BlockState pAdjacentBlockState,
+                                 @NotNull Direction pSide) {
+        return pAdjacentBlockState.is(this) || super.skipRendering(pState, pAdjacentBlockState, pSide);
+    }
+
+    @Override
+    public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter level, BlockPos pos,
+                                             FluidState fluidState)
+    {
+        return true;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState pState) {
+        return RenderShape.MODEL;
     }
 }

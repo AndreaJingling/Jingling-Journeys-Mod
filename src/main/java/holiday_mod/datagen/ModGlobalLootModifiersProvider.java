@@ -50,7 +50,8 @@ public class ModGlobalLootModifiersProvider extends GlobalLootModifierProvider {
             for (RegistryObject<Item> item : ModItems.ALL_CANDIES) {
                 assert item.getId() != null;
                 add(path + "_" + item.getId().getPath(), new AddItemModifier(new LootItemCondition[]{
-                        LootItemRandomChanceCondition.randomChance((float) (0.5 / (float) ModItems.ALL_CANDIES.size())).build(),
+                        LootItemRandomChanceCondition.randomChance((float) (0.5 / (float) ModItems.ALL_CANDIES.size()))
+                                .build(),
                         new LootTableIdCondition.Builder(location).build()
                 }, item.get(), 1, 5));
             }
