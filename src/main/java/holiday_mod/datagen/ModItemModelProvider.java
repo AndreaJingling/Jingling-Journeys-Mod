@@ -1,0 +1,58 @@
+package holiday_mod.datagen;
+
+import holiday_mod.Main;
+import holiday_mod.registry.ModItems;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
+
+public class ModItemModelProvider extends ItemModelProvider {
+    private ItemModelBuilder exampleGummyCandy;
+    private ItemModelBuilder exampleWrappedCandy;
+    private ItemModelBuilder candyCane;
+    private ItemModelBuilder sharpenedCandyCane;
+
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, Main.MOD_ID, existingFileHelper);
+    }
+
+    @Override
+    protected void registerModels() {
+        exampleGummyCandy = simpleItem(ModItems.EXAMPLE_GUMMY_CANDY);
+        exampleWrappedCandy = simpleItem(ModItems.EXAMPLE_WRAPPED_CANDY);
+        candyCane = simpleItem(ModItems.CANDY_CANE);
+        sharpenedCandyCane = simpleItem(ModItems.SHARPENED_CANDY_CANE);
+    }
+
+    // HELPER METHODS
+    public ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+        assert item.getId() != null;
+        return withExistingParent(item.getId().getPath(),
+                ResourceLocation.parse("item/generated")).texture("layer0",
+                ResourceLocation.tryBuild(Main.MOD_ID, "item/" + item.getId().getPath()));
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getExampleGummyCandy() {
+        return exampleGummyCandy;
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getExampleWrappedCandy() {
+        return exampleWrappedCandy;
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getCandyCane() {
+        return candyCane;
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getSharpenedCandyCane() {
+        return sharpenedCandyCane;
+    }
+}
