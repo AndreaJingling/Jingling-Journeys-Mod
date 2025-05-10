@@ -1,4 +1,4 @@
-package holiday_mod.candies;
+package holiday_mod.world.item;
 
 import holiday_mod.registry.ModItems;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,22 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import static holiday_mod.world.food.ModFoods.CANDY_CANE;
+
 public class CandyCane extends Item {
     public CandyCane(Properties pProperties) {
         super(pProperties);
     }
 
-    // I have the properties defined here for continuity.
     public static Item.Properties getProperties() {
-        return new Item.Properties()
-                .food((new FoodProperties.Builder())
-                        .nutrition(4)
-                        .saturationMod(1.2F)
-                        .effect(() ->
-                                new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10 * 20, 1),
-                                1.0F)
-                        .alwaysEat()
-                        .build());
+        return new Item.Properties().food(CANDY_CANE);
     }
 
     // If the player is not in creative it consumes the item and gives them the sharpened variant.

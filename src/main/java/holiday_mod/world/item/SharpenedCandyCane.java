@@ -1,4 +1,4 @@
-package holiday_mod.candies;
+package holiday_mod.world.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -13,6 +13,8 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import static holiday_mod.world.food.ModFoods.CANDY_CANE;
 
 // The sharpened variant of the candy cane, can be obtained by eating a candy cane.
 public class SharpenedCandyCane extends Item {
@@ -30,17 +32,8 @@ public class SharpenedCandyCane extends Item {
         this.defaultModifiers = builder.build();
     }
 
-    // I have the properties defined here for continuity.
     public static Properties getProperties() {
-        return new Properties()
-                .food((new FoodProperties.Builder())
-                        .nutrition(4)
-                        .saturationMod(1.2F)
-                        .effect(() ->
-                                new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10 * 20, 1),
-                                1.0F)
-                        .alwaysEat()
-                        .build());
+        return new Properties().food(CANDY_CANE);
     }
 
     public boolean hurtEnemy(ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {

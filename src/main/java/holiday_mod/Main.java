@@ -1,13 +1,16 @@
 package holiday_mod;
 
+import holiday_mod.client.renderer.entity.ElflikeRenderer;
 import holiday_mod.loot.ModLootModifiers;
 import holiday_mod.registry.*;
 import holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstructionTableScreen;
+import holiday_mod.world.entity.npc.ElfEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -17,8 +20,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -85,9 +91,6 @@ public class Main {
     public Main (FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
-
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -107,40 +110,57 @@ public class Main {
         // Register the Deferred Register to the mod event bus so sound events get registered
         SOUND_EVENTS.register(modEventBus);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         // Register the loot modifiers for changing existing loot pools.
         ModLootModifiers.register(modEventBus);
+    }
 
-        // Add all the candies to the wandering trader's loot pool.
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, WandererTradesEvent.class,
-                event -> {
+    @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class CommonForgeEvents {
+        @SubscribeEvent
+        public static void onWanderingTrades(WandererTradesEvent event) {
+            LOGGER.info("WandererTradesEvent");
             for (RegistryObject<Item> item : ModItems.ALL_CANDIES)
                 event.getGenericTrades().add(new BasicItemListing(2, new ItemStack(item.get(), 1),
                         5, 10));
-        });
+        }
     }
 
-    private void commonSetup(@SuppressWarnings("unused") final FMLCommonSetupEvent event) {
-        LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
+    @SuppressWarnings("unused")
+    @OnlyIn(Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class ClientForgeEvents {
+
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
+    @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class CommonModEvents {
+        @SubscribeEvent
+        public static void commonSetup(@SuppressWarnings("unused") final FMLCommonSetupEvent event) {
+            LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
+        }
+
+        @SubscribeEvent
+        public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+            LOGGER.info("EntityAttributeCreationEvent");
+            event.put(ModEntityTypes.elfEntityType.get(), ElfEntity.createAttributes().build());
+        }
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU.get(), SleighConstructionTableScreen::new);
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void onEntityRegisterRenderersEvent(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(ModEntityTypes.elfEntityType.get(), ElflikeRenderer::new);
         }
     }
 }
