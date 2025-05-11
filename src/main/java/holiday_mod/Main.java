@@ -5,6 +5,8 @@ import holiday_mod.loot.ModLootModifiers;
 import holiday_mod.registry.*;
 import holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstructionTableScreen;
 import holiday_mod.world.entity.npc.ElfEntity;
+import holiday_mod.world.entity.npc.KringleElfEntity;
+import holiday_mod.world.entity.npc.RankinBassElfEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
@@ -146,6 +148,8 @@ public class Main {
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
             LOGGER.info("EntityAttributeCreationEvent");
             event.put(ModEntityTypes.elfEntityType.get(), ElfEntity.createAttributes().build());
+            event.put(ModEntityTypes.kringleElfEntityType.get(), KringleElfEntity.createAttributes().build());
+            event.put(ModEntityTypes.rankinBassElfEntityType.get(), RankinBassElfEntity.createAttributes().build());
         }
     }
 
@@ -161,6 +165,8 @@ public class Main {
         @SubscribeEvent
         public static void onEntityRegisterRenderersEvent(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntityTypes.elfEntityType.get(), ElflikeRenderer::new);
+            event.registerEntityRenderer(ModEntityTypes.kringleElfEntityType.get(), ElflikeRenderer::new);
+            event.registerEntityRenderer(ModEntityTypes.rankinBassElfEntityType.get(), ElflikeRenderer::new);
         }
     }
 }

@@ -17,10 +17,10 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ElfEntity extends ElflikeEntity {
+public class RankinBassElfEntity extends ElflikeEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public ElfEntity(EntityType<? extends ElfEntity> pEntityType, Level pLevel) {
+    public RankinBassElfEntity(EntityType<? extends RankinBassElfEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
