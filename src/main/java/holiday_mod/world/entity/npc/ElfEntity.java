@@ -6,10 +6,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,55 +25,7 @@ public class ElfEntity extends ElflikeEntity {
         return null;
     }
 
-    @Override
-    public @NotNull SimpleContainer getInventory() {
-        return null; // TODO
-    }
 
-    @Override
-    public void setTradingPlayer(@Nullable Player pTradingPlayer) {
-
-    }
-
-    @Override
-    public @Nullable Player getTradingPlayer() {
-        return null;
-    }
-
-    @Override
-    public @NotNull MerchantOffers getOffers() {
-        return null;
-    }
-
-    @Override
-    public void overrideOffers(@NotNull MerchantOffers pOffers) {
-
-    }
-
-    @Override
-    public void notifyTrade(@NotNull MerchantOffer pOffer) {
-
-    }
-
-    @Override
-    public void notifyTradeUpdated(@NotNull ItemStack pStack) {
-
-    }
-
-    @Override
-    public int getVillagerXp() {
-        return 0;
-    }
-
-    @Override
-    public void overrideXp(int pXp) {
-
-    }
-
-    @Override
-    public boolean showProgressBar() {
-        return false;
-    }
 
     @Override
     public @NotNull SoundEvent getNotifyTradeSound() {
