@@ -1,6 +1,7 @@
-package holiday_mod.registry.block.sleighConstructionTable;
+package holiday_mod.world.level.block;
 
 import holiday_mod.registry.ModBlockEntities;
+import holiday_mod.world.level.block.entity.SleighConstructionTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;

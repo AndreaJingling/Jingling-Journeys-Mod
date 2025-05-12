@@ -1,6 +1,6 @@
-package holiday_mod.datagen;
+package holiday_mod.data;
 
-import holiday_mod.datagen.loot.HolidayBlockLootTables;
+import holiday_mod.data.loot.HolidayBlockLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;

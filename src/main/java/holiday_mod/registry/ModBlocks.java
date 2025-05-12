@@ -1,7 +1,7 @@
 package holiday_mod.registry;
 
 import holiday_mod.Main;
-import holiday_mod.registry.block.sleighConstructionTable.SleighConstructionTableBlock;
+import holiday_mod.world.level.block.SleighConstructionTableBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

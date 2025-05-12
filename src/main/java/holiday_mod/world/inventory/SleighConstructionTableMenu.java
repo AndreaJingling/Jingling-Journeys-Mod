@@ -1,8 +1,8 @@
-package holiday_mod.registry.block.sleighConstructionTable.screen;
+package holiday_mod.world.inventory;
 
 import holiday_mod.registry.ModBlocks;
 import holiday_mod.registry.ModMenuTypes;
-import holiday_mod.registry.block.sleighConstructionTable.SleighConstructionTableBlockEntity;
+import holiday_mod.world.level.block.entity.SleighConstructionTableBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

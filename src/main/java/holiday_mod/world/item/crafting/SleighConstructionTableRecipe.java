@@ -1,4 +1,4 @@
-package holiday_mod.recipies;
+package holiday_mod.world.item.crafting;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

@@ -5,8 +5,11 @@ import holiday_mod.registry.ModEntityTypes;
 import holiday_mod.world.entity.npc.ElflikeEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.model.GeoModel;
 
+@OnlyIn(Dist.CLIENT)
 public class ElflikeModel extends GeoModel<ElflikeEntity> {
     private static final ResourceLocation ELF_TEXTURE =
             ResourceLocation.tryBuild(Main.MOD_ID, "textures/entity/elflike/elf.png");

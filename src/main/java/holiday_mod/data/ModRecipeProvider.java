@@ -1,4 +1,4 @@
-package holiday_mod.datagen;
+package holiday_mod.data;
 
 import holiday_mod.registry.ModItems;
 import net.minecraft.data.PackOutput;

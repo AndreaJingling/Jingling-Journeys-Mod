@@ -1,8 +1,8 @@
-package holiday_mod.registry.block.sleighConstructionTable;
+package holiday_mod.world.level.block.entity;
 
-import holiday_mod.recipies.SleighConstructionTableRecipe;
+import holiday_mod.world.item.crafting.SleighConstructionTableRecipe;
 import holiday_mod.registry.ModBlockEntities;
-import holiday_mod.registry.block.sleighConstructionTable.screen.SleighConstructionTableMenu;
+import holiday_mod.world.inventory.SleighConstructionTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

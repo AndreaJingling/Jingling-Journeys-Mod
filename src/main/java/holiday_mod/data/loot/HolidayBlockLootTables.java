@@ -1,4 +1,4 @@
-package holiday_mod.datagen.loot;
+package holiday_mod.data.loot;
 
 import holiday_mod.Main;
 import holiday_mod.registry.ModBlocks;

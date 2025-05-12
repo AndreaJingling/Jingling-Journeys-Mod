@@ -1,4 +1,4 @@
-package holiday_mod.datagen;
+package holiday_mod.data;
 
 import holiday_mod.Main;
 import net.minecraft.data.DataGenerator;

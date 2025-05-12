@@ -1,6 +1,6 @@
 package holiday_mod.registry;
 
-import holiday_mod.recipies.SleighConstructionTableRecipe;
+import holiday_mod.world.item.crafting.SleighConstructionTableRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.RegistryObject;
 
