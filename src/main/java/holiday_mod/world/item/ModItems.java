@@ -34,7 +34,7 @@ public class ModItems {
     public static final RegistryObject<Item> ELF_SPAWN_EGG =
             register("elf_spawn_egg", (Item.Properties itemProperties) ->
                     new ForgeSpawnEggItem(ModEntityTypes.elfEntityType,
-                            0, 0, itemProperties),
+                            0x095207, 0x520707, itemProperties),
                     new Item.Properties(), false);
 
     // This can handle any candy that only applies a buff on eating, currently only speed.
