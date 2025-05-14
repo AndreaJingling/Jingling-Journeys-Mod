@@ -1,7 +1,7 @@
 package holiday_mod.data;
 
 import holiday_mod.Main;
-import holiday_mod.registry.ModItems;
+import holiday_mod.world.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

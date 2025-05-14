@@ -1,7 +1,6 @@
-package holiday_mod.registry;
+package holiday_mod.world.level.block;
 
 import holiday_mod.Main;
-import holiday_mod.world.level.block.SleighConstructionTableBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 import static holiday_mod.Main.BLOCKS;
-import static holiday_mod.registry.ModItems.ALL_ITEMS;
+import static holiday_mod.world.item.ModItems.ALL_ITEMS;
 
 public class ModBlocks {
 

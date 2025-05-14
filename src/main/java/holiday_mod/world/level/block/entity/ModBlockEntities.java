@@ -1,6 +1,6 @@
-package holiday_mod.registry;
+package holiday_mod.world.level.block.entity;
 
-import holiday_mod.world.level.block.entity.SleighConstructionTableBlockEntity;
+import holiday_mod.world.level.block.ModBlocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
 

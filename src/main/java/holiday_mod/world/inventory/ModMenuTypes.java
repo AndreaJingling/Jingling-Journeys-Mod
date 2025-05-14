@@ -1,7 +1,6 @@
-package holiday_mod.registry;
+package holiday_mod.world.inventory;
 
 import holiday_mod.Main;
-import holiday_mod.world.inventory.SleighConstructionTableMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;

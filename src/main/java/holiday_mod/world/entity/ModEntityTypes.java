@@ -1,4 +1,4 @@
-package holiday_mod.registry;
+package holiday_mod.world.entity;
 
 import holiday_mod.world.entity.npc.ElfEntity;
 import holiday_mod.world.entity.npc.KringleElfEntity;

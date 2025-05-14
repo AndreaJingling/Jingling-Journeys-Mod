@@ -1,7 +1,7 @@
 package holiday_mod.client.model.entity;
 
 import holiday_mod.Main;
-import holiday_mod.registry.ModEntityTypes;
+import holiday_mod.world.entity.ModEntityTypes;
 import holiday_mod.world.entity.npc.ElflikeEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;

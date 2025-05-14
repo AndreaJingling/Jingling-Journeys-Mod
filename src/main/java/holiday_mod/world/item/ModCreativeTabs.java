@@ -1,4 +1,4 @@
-package holiday_mod.registry;
+package holiday_mod.world.item;
 
 import holiday_mod.Main;
 import net.minecraft.network.chat.Component;

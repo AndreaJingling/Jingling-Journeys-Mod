@@ -1,6 +1,6 @@
 package holiday_mod.data;
 
-import holiday_mod.registry.ModItems;
+import holiday_mod.world.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;

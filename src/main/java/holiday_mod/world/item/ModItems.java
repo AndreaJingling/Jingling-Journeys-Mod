@@ -1,8 +1,6 @@
-package holiday_mod.registry;
+package holiday_mod.world.item;
 
 import holiday_mod.Main;
-import holiday_mod.world.item.CandyCane;
-import holiday_mod.world.item.SharpenedCandyCane;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;

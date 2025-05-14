@@ -1,7 +1,6 @@
 package holiday_mod.world.level.block.entity;
 
 import holiday_mod.world.item.crafting.SleighConstructionTableRecipe;
-import holiday_mod.registry.ModBlockEntities;
 import holiday_mod.world.inventory.SleighConstructionTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

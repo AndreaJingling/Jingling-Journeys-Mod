@@ -1,7 +1,7 @@
 package holiday_mod.data.loot;
 
 import holiday_mod.Main;
-import holiday_mod.registry.ModBlocks;
+import holiday_mod.world.level.block.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
