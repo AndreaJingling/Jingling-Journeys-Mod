@@ -14,6 +14,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder exampleGummyCandy;
     private ItemModelBuilder exampleWrappedCandy;
     private ItemModelBuilder sharpenedCandyCane;
+    private ItemModelBuilder genericSmallSled;
+    private ItemModelBuilder elfSpawnEgg;
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Main.MOD_ID, existingFileHelper);
@@ -24,6 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         exampleGummyCandy = simpleItem(ModItems.EXAMPLE_GUMMY_CANDY);
         exampleWrappedCandy = simpleItem(ModItems.EXAMPLE_WRAPPED_CANDY);
         sharpenedCandyCane = simpleItem(ModItems.SHARPENED_CANDY_CANE);
+        // genericSmallSled = simpleItem(ModItems.GENERIC_SMALL_SLED);
     }
 
     // HELPER METHODS
@@ -47,5 +50,15 @@ public class ModItemModelProvider extends ItemModelProvider {
     @SuppressWarnings("unused")
     public ItemModelBuilder getSharpenedCandyCane() {
         return sharpenedCandyCane;
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getGenericSmallSled() {
+        return genericSmallSled;
+    }
+
+    @SuppressWarnings("unused")
+    public ItemModelBuilder getElfSpawnEgg() {
+        return elfSpawnEgg;
     }
 }

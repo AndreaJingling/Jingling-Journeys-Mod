@@ -1,5 +1,6 @@
 package holiday_mod;
 
+import holiday_mod.client.renderer.entity.AbstractSleighRenderer;
 import holiday_mod.client.renderer.entity.ElflikeRenderer;
 import holiday_mod.loot.ModLootModifiers;
 import holiday_mod.client.gui.screens.inventory.SleighConstructionTableScreen;
@@ -8,6 +9,7 @@ import holiday_mod.world.entity.ModEntityTypes;
 import holiday_mod.world.entity.npc.ElfEntity;
 import holiday_mod.world.entity.npc.KringleElfEntity;
 import holiday_mod.world.entity.npc.RankinBassElfEntity;
+import holiday_mod.world.entity.vehicle.GenericSmallSledEntity;
 import holiday_mod.world.inventory.ModMenuTypes;
 import holiday_mod.world.item.ModCreativeTabs;
 import holiday_mod.world.item.ModItems;
@@ -171,6 +173,7 @@ public class Main {
             event.registerEntityRenderer(ModEntityTypes.elfEntityType.get(), ElflikeRenderer::new);
             event.registerEntityRenderer(ModEntityTypes.kringleElfEntityType.get(), ElflikeRenderer::new);
             event.registerEntityRenderer(ModEntityTypes.rankinBassElfEntityType.get(), ElflikeRenderer::new);
+            event.registerEntityRenderer(ModEntityTypes.genericSmallSledEntityType.get(), AbstractSleighRenderer::new);
         }
     }
 }

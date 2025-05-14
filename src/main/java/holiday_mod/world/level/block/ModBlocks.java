@@ -10,7 +10,6 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 import static holiday_mod.Main.BLOCKS;
-import static holiday_mod.world.item.ModItems.ALL_ITEMS;
 
 public class ModBlocks {
 
@@ -28,15 +27,12 @@ public class ModBlocks {
 
     @SuppressWarnings("SameParameterValue")
     private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        RegistryObject<Item> item = Main.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-        ALL_ITEMS.add(item);
-        return item;
+        return Main.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void init() {
     }
 
-    @SuppressWarnings("unused")
     public static RegistryObject<Item> getSleighConstructionTableItem() {
         return SLEIGH_CONSTRUCTION_TABLE_ITEM;
     }
