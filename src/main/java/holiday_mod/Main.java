@@ -179,7 +179,7 @@ public class Main {
 
         // Grabs the nbt piece and creates a SinglePoolElement of it that we can add to a structure's pool.
         // Use .legacy( for villages/outposts and .single( for everything else
-        SinglePoolElement piece = SinglePoolElement.single(nbtPieceRL, processorList)
+        SinglePoolElement piece = SinglePoolElement.legacy(nbtPieceRL, processorList)
                 .apply(StructureTemplatePool.Projection.RIGID);
 
         // Use AccessTransformer or Accessor Mixin to make StructureTemplatePool's templates field public for us to see.
@@ -224,13 +224,16 @@ public class Main {
                     "holiday_mod:village/taiga/houses/taiga_leatherworkers_house_1");
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
-                    "holiday_mod:village/taiga/houses/taiga_pen_1");
+                    "holiday_mod:village/taiga/houses/taiga_pens_1");
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
                     "holiday_mod:village/taiga/houses/taiga_sleigh_builder_1");
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
                     "holiday_mod:village/taiga/houses/taiga_toysmith_house_1");
+            //addBuildingToPool(templatePoolRegistry, processorListRegistry,
+            //        ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+            //        "holiday_mod:test");
         }
     }
 
