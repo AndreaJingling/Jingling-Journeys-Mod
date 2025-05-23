@@ -20,6 +20,7 @@
 
 package holiday_mod;
 
+import com.mojang.datafixers.util.Pair;
 import holiday_mod.client.renderer.entity.AbstractSleighRenderer;
 import holiday_mod.client.renderer.entity.ElflikeRenderer;
 import holiday_mod.loot.ModLootModifiers;
@@ -36,7 +37,12 @@ import holiday_mod.world.level.block.ModBlocks;
 import holiday_mod.world.level.block.entity.ModBlockEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.ProcessorLists;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
@@ -47,11 +53,16 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,6 +76,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MOD_ID)
@@ -142,6 +156,48 @@ public class Main {
         ModLootModifiers.register(modEventBus);
     }
 
+    // https://gist.github.com/TelepathicGrunt/4fdbc445ebcbcbeb43ac748f4b18f342
+    /**
+     * Adds the building to the targeted pool.<br>
+     * We will call this in addNewVillageBuilding method further down to add to every village.<br>
+     * <br>
+     * Note: This is an additive operation which means multiple mods can do this and they stack with each other
+     * safely.<br>
+     */
+    private static void addBuildingToPool(Registry<StructureTemplatePool> templatePoolRegistry,
+                                          Registry<StructureProcessorList> processorListRegistry,
+                                          ResourceLocation poolRL,
+                                          String nbtPieceRL) {
+
+        // Grabs the processor list we want to use along with our piece.
+        Holder<StructureProcessorList> processorList = processorListRegistry
+                .getHolderOrThrow(ProcessorLists.MOSSIFY_10_PERCENT);
+
+        // Grab the pool we want to add to
+        StructureTemplatePool pool = templatePoolRegistry.get(poolRL);
+        if (pool == null) return;
+
+        // Grabs the nbt piece and creates a SinglePoolElement of it that we can add to a structure's pool.
+        // Use .legacy( for villages/outposts and .single( for everything else
+        SinglePoolElement piece = SinglePoolElement.single(nbtPieceRL, processorList)
+                .apply(StructureTemplatePool.Projection.RIGID);
+
+        // Use AccessTransformer or Accessor Mixin to make StructureTemplatePool's templates field public for us to see.
+        // Weight is handled by how many times the entry appears in this list.
+        // We do not need to worry about immutability as this field is created using Lists.newArrayList(); which makes a mutable list.
+        for (int i = 0; i < 2; i++) {
+            pool.templates.add(piece);
+        }
+
+        // Use AccessTransformer or Accessor Mixin to make StructureTemplatePool's rawTemplates field public for us to see.
+        // This list of pairs of pieces and weights is not used by vanilla by default but another mod may need it for efficiency.
+        // So lets add to this list for completeness. We need to make a copy of the array as it can be an immutable list.
+        //   NOTE: This is a com.mojang.datafixers.util.Pair. It is NOT a fastUtil pair class. Use the mojang class.
+        List<Pair<StructurePoolElement, Integer>> listOfPieceEntries = new ArrayList<>(pool.rawTemplates);
+        listOfPieceEntries.add(new Pair<>(piece, 2));
+        pool.rawTemplates = listOfPieceEntries;
+    }
+
     @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class CommonForgeEvents {
         @SubscribeEvent
@@ -150,6 +206,31 @@ public class Main {
             for (RegistryObject<Item> item : ModItems.ALL_CANDIES)
                 event.getGenericTrades().add(new BasicItemListing(2, new ItemStack(item.get(), 1),
                         5, 10));
+        }
+
+        // https://gist.github.com/TelepathicGrunt/4fdbc445ebcbcbeb43ac748f4b18f342
+        @SubscribeEvent
+        public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+            Registry<StructureTemplatePool> templatePoolRegistry = event.getServer().registryAccess()
+                    .registry(Registries.TEMPLATE_POOL).orElseThrow();
+            Registry<StructureProcessorList> processorListRegistry = event.getServer().registryAccess()
+                    .registry(Registries.PROCESSOR_LIST).orElseThrow();
+
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+                    "holiday_mod:village/taiga/houses/taiga_homestead_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+                    "holiday_mod:village/taiga/houses/taiga_leatherworkers_house_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+                    "holiday_mod:village/taiga/houses/taiga_pen_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+                    "holiday_mod:village/taiga/houses/taiga_sleigh_builder_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
+                    "holiday_mod:village/taiga/houses/taiga_toysmith_house_1");
         }
     }
 
