@@ -7,9 +7,6 @@ import holiday_mod.client.gui.screens.inventory.SleighConstructionTableScreen;
 import holiday_mod.sounds.ModSoundEvents;
 import holiday_mod.world.entity.ModEntityTypes;
 import holiday_mod.world.entity.npc.ElfEntity;
-import holiday_mod.world.entity.npc.KringleElfEntity;
-import holiday_mod.world.entity.npc.RankinBassElfEntity;
-import holiday_mod.world.entity.vehicle.GenericSmallSledEntity;
 import holiday_mod.world.inventory.ModMenuTypes;
 import holiday_mod.world.item.ModCreativeTabs;
 import holiday_mod.world.item.ModItems;
@@ -154,8 +151,6 @@ public class Main {
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
             LOGGER.info("EntityAttributeCreationEvent");
             event.put(ModEntityTypes.elfEntityType.get(), ElfEntity.createAttributes().build());
-            event.put(ModEntityTypes.kringleElfEntityType.get(), KringleElfEntity.createAttributes().build());
-            event.put(ModEntityTypes.rankinBassElfEntityType.get(), RankinBassElfEntity.createAttributes().build());
         }
     }
 
@@ -171,8 +166,6 @@ public class Main {
         @SubscribeEvent
         public static void onEntityRegisterRenderersEvent(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntityTypes.elfEntityType.get(), ElflikeRenderer::new);
-            event.registerEntityRenderer(ModEntityTypes.kringleElfEntityType.get(), ElflikeRenderer::new);
-            event.registerEntityRenderer(ModEntityTypes.rankinBassElfEntityType.get(), ElflikeRenderer::new);
             event.registerEntityRenderer(ModEntityTypes.genericSmallSledEntityType.get(), AbstractSleighRenderer::new);
         }
     }

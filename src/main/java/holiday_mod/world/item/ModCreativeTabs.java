@@ -18,6 +18,7 @@ public class ModCreativeTabs {
                 output.accept(ModItems.SHARPENED_CANDY_CANE.get());
                 output.accept(ModItems.EXAMPLE_GUMMY_CANDY.get());
                 output.accept(ModItems.EXAMPLE_WRAPPED_CANDY.get());
+                output.accept(ModItems.GENERIC_SMALL_SLED.get());
                 output.accept(ModItems.ELF_SPAWN_EGG.get());
                 output.accept(ModBlocks.getSleighConstructionTableItem().get());
             }).build());

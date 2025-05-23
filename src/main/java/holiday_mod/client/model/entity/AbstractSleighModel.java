@@ -15,7 +15,7 @@ public class AbstractSleighModel extends GeoModel<AbstractSleighEntity> {
             ResourceLocation.tryBuild(Main.MOD_ID, "textures/entity/sleigh/generic_small_sled.png");
 
     private static final ResourceLocation GENERIC_SMALL_SLED_MODEL =
-            ResourceLocation.tryBuild(Main.MOD_ID, "geo/entity/blank.geo.json");//"geo/entity/generic_small_sled.geo.json");
+            ResourceLocation.tryBuild(Main.MOD_ID, "geo/entity/generic_small_sled.geo.json");
 
     private static final ResourceLocation GENERIC_SMALL_SLED_ANIMATION =
             ResourceLocation.tryBuild(Main.MOD_ID, "animations/entity/generic_small_sled.animation.json");
