@@ -68,13 +68,13 @@ description='''${mod_description}'''
 [[dependencies.${mod_id}]]
     modId="geckolib"
     mandatory=true
-    versionRange="[4.7,)"
+    versionRange="[4.7.3,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.${mod_id}]]
     modId="terrablender"
     mandatory=false
-    versionRange="[3.0.1.0,)"
+    versionRange="[3.0.1.10,)"
     ordering="AFTER"
     side="BOTH"
 
