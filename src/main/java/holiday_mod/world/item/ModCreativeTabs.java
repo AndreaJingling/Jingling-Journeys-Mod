@@ -41,6 +41,8 @@ public class ModCreativeTabs {
                 output.accept(ModItems.GENERIC_SMALL_SLED.get());
                 output.accept(ModItems.ELF_SPAWN_EGG.get());
                 output.accept(ModBlocks.getSleighConstructionTableItem().get());
+                output.accept(ModBlocks.getLeatherworkerTableItem().get());
+                output.accept(ModBlocks.getToysmithTableItem().get());
             }).build());
 
     // Used to load this class at the needed time from main.

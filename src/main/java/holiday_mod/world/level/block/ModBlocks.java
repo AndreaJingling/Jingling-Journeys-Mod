@@ -37,23 +37,41 @@ public class ModBlocks {
             registerBlock("sleigh_construction_table",
                     () -> new SleighConstructionTableBlock(BlockBehaviour.Properties.of()));
     private static RegistryObject<Item> SLEIGH_CONSTRUCTION_TABLE_ITEM;
+    public static final RegistryObject<Block> LEATHERWORKER_TABLE =
+            registerBlock("leatherworker_table",
+                    () -> new LeatherworkerTableBlock(BlockBehaviour.Properties.of()));
+    private static RegistryObject<Item> LEATHERWORKER_TABLE_ITEM;
+    public static final RegistryObject<Block> TOYSMITH_TABLE =
+            registerBlock("toysmith_table",
+                    () -> new ToysmithTableBlock(BlockBehaviour.Properties.of()));
+    private static RegistryObject<Item> TOYSMITH_TABLE_ITEM;
 
     @SuppressWarnings("SameParameterValue")
     private static <T extends Block> RegistryObject<T> registerBlock(String id, Supplier<T> block) {
-        RegistryObject<T> toReturn = BLOCKS.register(id, block);
-        SLEIGH_CONSTRUCTION_TABLE_ITEM = registerBlockItem(id, toReturn);
-        return toReturn;
+        return BLOCKS.register(id, block);
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return Main.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    private static <T extends Block>RegistryObject<Item> registerBlockItem(RegistryObject<T> block) {
+        assert block.getId() != null;
+        return Main.ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void init() {
+        SLEIGH_CONSTRUCTION_TABLE_ITEM = registerBlockItem(SLEIGH_CONSTRUCTION_TABLE);
+        LEATHERWORKER_TABLE_ITEM = registerBlockItem(LEATHERWORKER_TABLE);
+        TOYSMITH_TABLE_ITEM = registerBlockItem(TOYSMITH_TABLE);
     }
 
     public static RegistryObject<Item> getSleighConstructionTableItem() {
         return SLEIGH_CONSTRUCTION_TABLE_ITEM;
+    }
+
+    public static RegistryObject<Item> getLeatherworkerTableItem() {
+        return LEATHERWORKER_TABLE_ITEM;
+    }
+
+    public static RegistryObject<Item> getToysmithTableItem() {
+        return TOYSMITH_TABLE_ITEM;
     }
 }

@@ -22,6 +22,8 @@ package holiday_mod.world.level.block;
 
 import holiday_mod.world.level.block.entity.ModBlockEntities;
 import holiday_mod.world.level.block.entity.SleighConstructionTableBlockEntity;
+import holiday_mod.world.level.block.state.properties.ModBlockStateProperties;
+import holiday_mod.world.level.block.state.properties.SleighConstructionTableType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,8 +41,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +53,9 @@ import java.util.Objects;
 
 public class SleighConstructionTableBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<SleighConstructionTableType> TYPE =
+            ModBlockStateProperties.SLEIGH_CONSTRUCTION_TABLE_TYPE;
+
     public SleighConstructionTableBlock(Properties pProperties) {
         super(pProperties);
     }
