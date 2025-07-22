@@ -69,12 +69,24 @@ public class SleighConstructionTableBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getCounterClockWise());
+        return this.defaultBlockState()
+                .setValue(FACING, pContext.getHorizontalDirection().getCounterClockWise())
+                .setValue(TYPE,
+                        (pContext.getLevel().getBlockState(pContext.getClickedPos().north()).getBlock()
+                                instanceof SleighConstructionTableBlock)
+                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().east()).getBlock()
+                                instanceof SleighConstructionTableBlock)
+                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().south()).getBlock()
+                                instanceof SleighConstructionTableBlock)
+                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().west()).getBlock()
+                                instanceof SleighConstructionTableBlock) ?
+                                SleighConstructionTableType.EXTENSION : SleighConstructionTableType.MAIN
+                        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING).add(TYPE);
     }
 
     @Override
