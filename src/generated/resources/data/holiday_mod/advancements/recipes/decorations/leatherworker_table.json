@@ -1,31 +1,31 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_cobblestone": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/copper"
+            "tag": "forge:cobblestone"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_glowstone_dust": {
+    "has_iron_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:dusts/glowstone"
+            "tag": "forge:ingots/iron"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_planks": {
+    "has_leather": {
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "tag": "forge:leather"
           }
         ]
       },
@@ -33,22 +33,22 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "holiday_mod:sleigh_construction_table"
+        "recipe": "holiday_mod:leatherworker_table"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_copper_ingot",
-      "has_planks",
-      "has_glowstone_dust",
+      "has_iron_ingot",
+      "has_cobblestone",
+      "has_leather",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "holiday_mod:sleigh_construction_table"
+      "holiday_mod:leatherworker_table"
     ]
   },
   "sends_telemetry_event": false

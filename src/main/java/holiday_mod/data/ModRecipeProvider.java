@@ -25,7 +25,6 @@ import holiday_mod.world.level.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
@@ -44,18 +43,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern(" # ")
                 .pattern("# #")
                 .pattern("  #")
-                .unlockedBy(getHasName(Items.SUGAR), RecipeProvider.has(Items.SUGAR))
+                .unlockedBy("has_sugar", RecipeProvider.has(Items.SUGAR))
                 .save(writer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.EXAMPLE_GUMMY_CANDY.get())
                 .requires(Items.SUGAR)
                 .requires(Items.SUGAR)
-                .unlockedBy(getHasName(net.minecraft.world.item.Items.SUGAR), RecipeProvider.has(Items.SUGAR))
+                .unlockedBy("has_sugar", RecipeProvider.has(Items.SUGAR))
                 .save(writer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.EXAMPLE_WRAPPED_CANDY.get())
                 .requires(Items.SUGAR)
                 .requires(Items.PAPER)
-                .unlockedBy(getHasName(Items.SUGAR), RecipeProvider.has(Items.SUGAR))
-                .unlockedBy(getHasName(Items.PAPER), RecipeProvider.has(Items.PAPER))
+                .unlockedBy("has_sugar", RecipeProvider.has(Items.SUGAR))
+                .unlockedBy("has_paper", RecipeProvider.has(Items.PAPER))
                 .save(writer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.getSleighConstructionTableItem().get())
                 .define('c', Tags.Items.INGOTS_COPPER)
@@ -64,9 +63,20 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("ccc")
                 .pattern("PGP")
                 .pattern("PPP")
-                .unlockedBy(getHasName(Items.COPPER_INGOT), RecipeProvider.has(Tags.Items.INGOTS_COPPER))
-                .unlockedBy(getHasName(Items.OAK_PLANKS), RecipeProvider.has(ItemTags.PLANKS))
-                .unlockedBy(getHasName(Items.GLOWSTONE_DUST), RecipeProvider.has(Tags.Items.DUSTS_GLOWSTONE))
+                .unlockedBy("has_copper_ingot", RecipeProvider.has(Tags.Items.INGOTS_COPPER))
+                .unlockedBy("has_planks", RecipeProvider.has(ItemTags.PLANKS))
+                .unlockedBy("has_glowstone_dust", RecipeProvider.has(Tags.Items.DUSTS_GLOWSTONE))
+                .save(writer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.getLeatherworkerTableItem().get())
+                .define('i', Tags.Items.INGOTS_IRON)
+                .define('C', Tags.Items.COBBLESTONE)
+                .define('L', Tags.Items.LEATHER)
+                .pattern("iLi")
+                .pattern("CCC")
+                .pattern("CCC")
+                .unlockedBy("has_iron_ingot", RecipeProvider.has(Tags.Items.INGOTS_IRON))
+                .unlockedBy("has_cobblestone", RecipeProvider.has(Tags.Items.COBBLESTONE))
+                .unlockedBy("has_leather", RecipeProvider.has(Tags.Items.LEATHER))
                 .save(writer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.getToysmithTableItem().get())
                 .define('s', Tags.Items.SHEARS) // Scissors

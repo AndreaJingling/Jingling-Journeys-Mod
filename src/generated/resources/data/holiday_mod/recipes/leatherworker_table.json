@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "forge:cobblestone"
+    },
+    "L": {
+      "tag": "forge:leather"
+    },
+    "i": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    "iLi",
+    "CCC",
+    "CCC"
+  ],
+  "result": {
+    "item": "holiday_mod:leatherworker_table"
+  },
+  "show_notification": true
+}
