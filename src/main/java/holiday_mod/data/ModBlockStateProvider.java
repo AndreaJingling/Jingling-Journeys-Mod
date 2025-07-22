@@ -36,7 +36,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        translucentBlockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
+        translucentHorizontallyDirectionalBlockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
         translucentBlockItem(ModBlocks.LEATHERWORKER_TABLE);
         translucentBlockItem(ModBlocks.TOYSMITH_TABLE);
     }
@@ -45,6 +45,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @SuppressWarnings("SameParameterValue")
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private void translucentHorizontallyDirectionalBlockItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(),
+                ((BlockModelBuilder) directionalBlock(blockRegistryObject.get(), ))
+                .renderType("translucent"));
     }
 
     @SuppressWarnings("SameParameterValue")

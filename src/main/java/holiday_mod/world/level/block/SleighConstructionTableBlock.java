@@ -33,13 +33,16 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
@@ -95,10 +98,46 @@ public class SleighConstructionTableBlock extends Block {
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand,
                                           @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
-            NetworkHooks.openScreen(((ServerPlayer)pPlayer), getMenuProvider(pState, pLevel, pPos));
+            // NetworkHooks.openScreen(((ServerPlayer)pPlayer), getMenuProvider(pState, pLevel, pPos));
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+
+    /**
+     * @return the Direction pointing from the given state to its attached table component
+     */
+    public static Direction getConnectedDirection(BlockState p_51585_) {
+        Direction direction = p_51585_.getValue(FACING);
+        return p_51585_.getValue(TYPE) == SleighConstructionTableType.MAIN ? direction.getClockWise() : direction.getCounterClockWise();
+    }
+
+    /**
+     * Update the provided state given the provided neighbor direction and neighbor state, returning a new state.
+     * For example, fences make their connections to the passed in state if possible, and wet concrete powder immediately
+     * returns its solidified counterpart.
+     * Note that this method should ideally consider only the specific direction passed in.
+     */
+    @SuppressWarnings("deprecation")
+    public @NotNull BlockState updateShape(@NotNull BlockState pState,
+                                           @NotNull Direction pFacing,
+                                           BlockState pFacingState,
+                                           @NotNull LevelAccessor pLevel,
+                                           @NotNull BlockPos pCurrentPos,
+                                           @NotNull BlockPos pFacingPos) {
+        if (pFacingState.is(this) && pFacing.getAxis().isHorizontal()) {
+            SleighConstructionTableType sleighConstructionTableType = pFacingState.getValue(TYPE);
+            if (pState.getValue(TYPE) == SleighConstructionTableType.MAIN
+                    && sleighConstructionTableType != SleighConstructionTableType.MAIN
+                    && pState.getValue(FACING) == pFacingState.getValue(FACING)
+                    && getConnectedDirection(pFacingState) == pFacing.getOpposite()) {
+                return pState.setValue(TYPE, sleighConstructionTableType.getOpposite());
+            }
+        } else if (getConnectedDirection(pState) == pFacing) {
+            return pState.setValue(TYPE, SleighConstructionTableType.MAIN);
+        }
+
+        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
     private boolean hasExtension(BlockState pState, Level pLevel, BlockPos pPos) {
