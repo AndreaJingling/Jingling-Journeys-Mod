@@ -22,9 +22,12 @@ package holiday_mod.data;
 
 import holiday_mod.Main;
 import holiday_mod.world.level.block.ModBlocks;
+import holiday_mod.world.level.block.state.properties.ModBlockStateProperties;
+import holiday_mod.world.level.block.state.properties.SleighConstructionTableType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
@@ -36,31 +39,39 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        translucentHorizontallyDirectionalBlockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
-        translucentBlockItem(ModBlocks.LEATHERWORKER_TABLE);
-        translucentBlockItem(ModBlocks.TOYSMITH_TABLE);
+        horizontalBlock(ModBlocks.SLEIGH_CONSTRUCTION_TABLE.get(), (BlockState state) ->
+            new ModelFile.ExistingModelFile(
+                    (state.getValue(ModBlockStateProperties.SLEIGH_CONSTRUCTION_TABLE_TYPE)
+                            == SleighConstructionTableType.MAIN) ?
+                            ResourceLocation.tryBuild(Main.MOD_ID, "block/sleigh_construction_table_main") :
+                            ResourceLocation.tryBuild(Main.MOD_ID, "block/sleigh_construction_table_extension"),
+                    models().existingFileHelper)
+        );
+        blockItemWithExistingModel(ModBlocks.LEATHERWORKER_TABLE,
+                ResourceLocation.tryBuild(Main.MOD_ID, "block/leatherworker_table"));
+        blockItemWithExistingModel(ModBlocks.TOYSMITH_TABLE,
+                ResourceLocation.tryBuild(Main.MOD_ID, "block/toysmith_table"));
     }
 
     // HELPER METHODS
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void translucentHorizontallyDirectionalBlockItem(RegistryObject<Block> blockRegistryObject) {
+    @SuppressWarnings({"SameParameterValue", "unused"})
+    private void blockItemWithExistingModel(RegistryObject<Block> blockRegistryObject, ResourceLocation modelLocation) {
         simpleBlockWithItem(blockRegistryObject.get(),
-                ((BlockModelBuilder) directionalBlock(blockRegistryObject.get(), ))
-                .renderType("translucent"));
+                new ModelFile.ExistingModelFile(modelLocation, models().existingFileHelper));
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     private void translucentBlockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), ((BlockModelBuilder) cubeAll(blockRegistryObject.get()))
                 .renderType("translucent"));
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     private void simpleItem(RegistryObject<Block> blockRegistryObject) {
         assert blockRegistryObject.getId() != null;
         itemModels()

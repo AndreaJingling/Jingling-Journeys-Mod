@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "render_type": "translucent",
-  "textures": {
-    "all": "holiday_mod:block/sleigh_construction_table"
-  }
-}

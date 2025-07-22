@@ -1,7 +1,34 @@
 {
   "variants": {
-    "": {
-      "model": "holiday_mod:block/sleigh_construction_table"
+    "facing=east,type=extension": {
+      "model": "holiday_mod:block/sleigh_construction_table_extension",
+      "y": 90
+    },
+    "facing=east,type=main": {
+      "model": "holiday_mod:block/sleigh_construction_table_main",
+      "y": 90
+    },
+    "facing=north,type=extension": {
+      "model": "holiday_mod:block/sleigh_construction_table_extension"
+    },
+    "facing=north,type=main": {
+      "model": "holiday_mod:block/sleigh_construction_table_main"
+    },
+    "facing=south,type=extension": {
+      "model": "holiday_mod:block/sleigh_construction_table_extension",
+      "y": 180
+    },
+    "facing=south,type=main": {
+      "model": "holiday_mod:block/sleigh_construction_table_main",
+      "y": 180
+    },
+    "facing=west,type=extension": {
+      "model": "holiday_mod:block/sleigh_construction_table_extension",
+      "y": 270
+    },
+    "facing=west,type=main": {
+      "model": "holiday_mod:block/sleigh_construction_table_main",
+      "y": 270
     }
   }
 }
