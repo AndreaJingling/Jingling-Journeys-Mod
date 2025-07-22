@@ -37,10 +37,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         translucentBlockItem(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
+        translucentBlockItem(ModBlocks.LEATHERWORKER_TABLE);
+        translucentBlockItem(ModBlocks.TOYSMITH_TABLE);
     }
 
     // HELPER METHODS
-    @SuppressWarnings("unused")
+    @SuppressWarnings("SameParameterValue")
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }

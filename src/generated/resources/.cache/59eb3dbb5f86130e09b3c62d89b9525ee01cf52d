@@ -1,2 +1,4 @@
-// 1.20.1	2025-05-09T11:12:26.913374001	Loot Tables
+// 1.20.1	2025-07-21T20:06:58.2059965	Loot Tables
+7c686ba50e2b26dd910db7d17bc44c41157fc562 data/holiday_mod/loot_tables/blocks/leatherworker_table.json
 edca9190a361f6d71c3a69c64fb33619d1f0c440 data/holiday_mod/loot_tables/blocks/sleigh_construction_table.json
+c49f33d01d5737650b37e2af27b17f4b36f08b0c data/holiday_mod/loot_tables/blocks/toysmith_table.json

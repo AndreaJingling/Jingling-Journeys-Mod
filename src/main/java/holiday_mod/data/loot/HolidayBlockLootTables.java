@@ -38,6 +38,8 @@ public class HolidayBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         drop(ModBlocks.SLEIGH_CONSTRUCTION_TABLE);
+        drop(ModBlocks.LEATHERWORKER_TABLE);
+        drop(ModBlocks.TOYSMITH_TABLE);
     }
 
     @Override

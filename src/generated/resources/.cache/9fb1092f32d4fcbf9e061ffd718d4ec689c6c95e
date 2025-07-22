@@ -1,7 +1,11 @@
-// 1.20.1	2025-02-20T20:23:07.2365444	Recipes
+// 1.20.1	2025-07-21T20:06:58.209551038	Recipes
+11bbce983cc76a8229b65479cd7f79e740f1bd61 data/holiday_mod/advancements/recipes/decorations/sleigh_construction_table.json
+8e839c609d36f5b93026489c7bb600b8026b215a data/holiday_mod/advancements/recipes/decorations/toysmith_table.json
 83bd084c628cdc755a2b8289a3ad37cbf11031f1 data/holiday_mod/advancements/recipes/food/candy_cane.json
 6ea196bdffd84cbf60dcf36d038ecb0368be2312 data/holiday_mod/advancements/recipes/food/example_gummy_candy.json
 a6f2001c7a49348edc8a67434789740b0587f168 data/holiday_mod/advancements/recipes/food/example_wrapped_candy.json
 a3889ac523964021644df285282e204fb4a16d2b data/holiday_mod/recipes/candy_cane.json
 ecd50fa17a85eb65cf3fd43c6570a9d4cf4a316b data/holiday_mod/recipes/example_gummy_candy.json
 81e340cee772772573d187c69c07656192948284 data/holiday_mod/recipes/example_wrapped_candy.json
+d7d1e440fc35986b85672b318505fb19121e50b2 data/holiday_mod/recipes/sleigh_construction_table.json
+ee853619372984539108e758411ffce5cc849866 data/holiday_mod/recipes/toysmith_table.json
