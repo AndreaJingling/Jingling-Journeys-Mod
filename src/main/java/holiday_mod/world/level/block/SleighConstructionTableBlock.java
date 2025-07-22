@@ -26,7 +26,8 @@ import holiday_mod.world.level.block.state.properties.SleighConstructionTableTyp
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -38,13 +39,10 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,22 +67,37 @@ public class SleighConstructionTableBlock extends Block {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
-    @Nullable
+    private Direction candidatePartnerFacing(BlockPlaceContext pContext, Direction pDirection) {
+        BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos().relative(pDirection));
+        return blockstate.is(ModBlocks.SLEIGH_CONSTRUCTION_TABLE.get())
+                && blockstate.getValue(TYPE) == SleighConstructionTableType.MAIN ?
+                blockstate.getValue(FACING) : null;
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState()
-                .setValue(FACING, pContext.getHorizontalDirection().getCounterClockWise())
-                .setValue(TYPE,
-                        (pContext.getLevel().getBlockState(pContext.getClickedPos().north()).getBlock()
-                                instanceof SleighConstructionTableBlock)
-                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().east()).getBlock()
-                                instanceof SleighConstructionTableBlock)
-                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().south()).getBlock()
-                                instanceof SleighConstructionTableBlock)
-                                || (pContext.getLevel().getBlockState(pContext.getClickedPos().west()).getBlock()
-                                instanceof SleighConstructionTableBlock) ?
-                                SleighConstructionTableType.EXTENSION : SleighConstructionTableType.MAIN
-                        );
+        SleighConstructionTableType sleighConstructionTableType = SleighConstructionTableType.MAIN;
+        Direction direction = pContext.getHorizontalDirection().getOpposite();
+        boolean flag = pContext.isSecondaryUseActive();
+        Direction direction1 = pContext.getClickedFace();
+        if (direction1.getAxis().isHorizontal() && flag) {
+            Direction direction2 = this.candidatePartnerFacing(pContext, direction1.getOpposite());
+            if (direction2 != null && direction2.getAxis() != direction1.getAxis()) {
+                direction = direction2;
+                sleighConstructionTableType
+                        = direction2.getClockWise() == direction1.getOpposite() ?
+                        SleighConstructionTableType.EXTENSION : SleighConstructionTableType.MAIN;
+            }
+        }
+
+        if (sleighConstructionTableType == SleighConstructionTableType.MAIN && !flag) {
+            if (direction == this.candidatePartnerFacing(pContext, direction.getClockWise())) {
+                sleighConstructionTableType = SleighConstructionTableType.EXTENSION;
+            }
+        }
+
+        return this.defaultBlockState().setValue(FACING, direction)
+                .setValue(TYPE, sleighConstructionTableType);
     }
 
     @Override
@@ -133,23 +146,41 @@ public class SleighConstructionTableBlock extends Block {
                     && getConnectedDirection(pFacingState) == pFacing.getOpposite()) {
                 return pState.setValue(TYPE, sleighConstructionTableType.getOpposite());
             }
-        } else if (getConnectedDirection(pState) == pFacing) {
-            return pState.setValue(TYPE, SleighConstructionTableType.MAIN);
+        } else if (getConnectedDirection(pState).getOpposite() == pFacing) {
+            if (!pLevel.isClientSide()) {
+                pLevel.scheduleTick(pCurrentPos, this, 1);
+            }
+            return pState;
         }
 
         return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos,
+                     @NotNull RandomSource pRandom) {
+        Direction direction = getConnectedDirection(pState);
+        BlockState partnerBlockState = pLevel.getBlockState(pPos.relative(direction));
+        if ((pState.getValue(TYPE) == SleighConstructionTableType.EXTENSION) && (
+                !(partnerBlockState.getBlock() instanceof SleighConstructionTableBlock) ||
+                (partnerBlockState.getValue(FACING) != direction) ||
+                (partnerBlockState.getValue(TYPE) == SleighConstructionTableType.MAIN))
+        )
+        {
+            pLevel.destroyBlock(pPos, true);
+        }
+
+
+        super.tick(pState, pLevel, pPos, pRandom);
+    }
+
     private boolean hasExtension(BlockState pState, Level pLevel, BlockPos pPos) {
         return (pState.getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
-                (pLevel.getBlockState(pPos.north()).getBlock() instanceof SleighConstructionTableBlock
-                        && pLevel.getBlockState(pPos.north()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
-                (pLevel.getBlockState(pPos.east()).getBlock() instanceof SleighConstructionTableBlock
-                        && pLevel.getBlockState(pPos.east()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
-                (pLevel.getBlockState(pPos.south()).getBlock() instanceof SleighConstructionTableBlock
-                        && pLevel.getBlockState(pPos.south()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
-                (pLevel.getBlockState(pPos.west()).getBlock() instanceof SleighConstructionTableBlock
-                        && pLevel.getBlockState(pPos.west()).getValue(TYPE) == SleighConstructionTableType.EXTENSION);
+                (pLevel.getBlockState(pPos.relative(getConnectedDirection(pState))).getBlock()
+                        instanceof SleighConstructionTableBlock) &&
+                        (pLevel.getBlockState(pPos.relative(getConnectedDirection(pState))).getValue(TYPE)
+                                == SleighConstructionTableType.EXTENSION);
     }
 
     @Nullable

@@ -7,6 +7,10 @@
   "item.holiday_mod.generic_small_sled": "Generic Small Sled",
 
   "block.holiday_mod.sleigh_construction_table": "Sleigh Construction Table",
+  "block.holiday_mod.leatherworker_table": "Leatherworker Table",
+  "block.holiday_mod.toysmith_table": "Toysmith Table",
 
-  "container.holiday_mod.sleigh_construction_table": "Sleigh Construction Table"
+  "container.holiday_mod.sleigh_construction_table": "Sleigh Construction Table",
+  "container.holiday_mod.leatherworker_table": "Leatherworker Table",
+  "container.holiday_mod.toysmith_table": "Toysmith Table"
 }
