@@ -29,6 +29,7 @@ import holiday_mod.sounds.ModSoundEvents;
 import holiday_mod.world.entity.ModEntityTypes;
 import holiday_mod.world.entity.npc.ElfEntity;
 import holiday_mod.world.inventory.ModMenuTypes;
+import holiday_mod.world.inventory.SleighConstructionTableMenu;
 import holiday_mod.world.item.ModCreativeTabs;
 import holiday_mod.world.item.ModItems;
 import holiday_mod.world.item.crafting.ModRecipeTypes;
@@ -41,10 +42,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.ProcessorLists;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -263,7 +265,14 @@ public class Main {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU.get(), SleighConstructionTableScreen::new);
+            MenuScreens.register(ModMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU_SINGLE.get(), (SleighConstructionTableMenu pMenu,
+                                                                                     Inventory pPlayerInventory,
+                                                                                     Component pTitle) ->
+                    new SleighConstructionTableScreen(pMenu, pPlayerInventory, pTitle, false));
+            MenuScreens.register(ModMenuTypes.SLEIGH_CONSTRUCTION_TABLE_MENU_EXTENDED.get(), (SleighConstructionTableMenu pMenu,
+                                                                                            Inventory pPlayerInventory,
+                                                                                            Component pTitle) ->
+                    new SleighConstructionTableScreen(pMenu, pPlayerInventory, pTitle, true));
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
 

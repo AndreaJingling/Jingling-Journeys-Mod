@@ -35,23 +35,27 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class SleighConstructionTableScreen extends AbstractContainerScreen<SleighConstructionTableMenu> {
-    private static final ResourceLocation GUI =
+    private static final ResourceLocation GUI_SINGLE =
+            ResourceLocation.tryBuild(Main.MOD_ID, "textures/gui/singlesleigh_construction_table_gui.png");
+    private static final ResourceLocation GUI_NORMAL =
             ResourceLocation.tryBuild(Main.MOD_ID, "textures/gui/sleigh_construction_table_gui.png");
+    private final boolean hasExtension;
 
     public SleighConstructionTableScreen(SleighConstructionTableMenu pMenu, Inventory pPlayerInventory,
-                                         Component pTitle) {
+                                         Component pTitle, boolean hasExtension) {
         super(pMenu, pPlayerInventory, pTitle);
+        this.hasExtension = hasExtension;
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI);
+        RenderSystem.setShaderTexture(0, hasExtension ? GUI_NORMAL : GUI_SINGLE);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(GUI, x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(hasExtension ? GUI_NORMAL : GUI_SINGLE, x, y, 0, 0, imageWidth, imageHeight);
     }
 
     @Override

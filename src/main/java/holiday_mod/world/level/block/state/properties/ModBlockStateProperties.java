@@ -1,6 +1,5 @@
 package holiday_mod.world.level.block.state.properties;
 
-import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class ModBlockStateProperties {

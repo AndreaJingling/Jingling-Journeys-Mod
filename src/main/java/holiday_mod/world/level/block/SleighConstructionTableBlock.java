@@ -20,23 +20,20 @@
 
 package holiday_mod.world.level.block;
 
-import holiday_mod.world.level.block.entity.ModBlockEntities;
-import holiday_mod.world.level.block.entity.SleighConstructionTableBlockEntity;
+import holiday_mod.world.inventory.SleighConstructionTableMenu;
 import holiday_mod.world.level.block.state.properties.ModBlockStateProperties;
 import holiday_mod.world.level.block.state.properties.SleighConstructionTableType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -44,14 +41,13 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
-public class SleighConstructionTableBlock extends BaseEntityBlock {
+public class SleighConstructionTableBlock extends Block {
+    private static final Component CONTAINER_TITLE =
+            Component.translatable("container.holiday_mod.sleigh_construction_table");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<SleighConstructionTableType> TYPE =
             ModBlockStateProperties.SLEIGH_CONSTRUCTION_TABLE_TYPE;
@@ -81,50 +77,37 @@ public class SleighConstructionTableBlock extends BaseEntityBlock {
         pBuilder.add(FACING);
     }
 
-    // BLOCK ENTITY
-
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void onRemove(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
-                         @NotNull BlockState pNewState, boolean pMovedByPiston) {
-        if (!pLevel.isClientSide()) {
-            ((SleighConstructionTableBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(pPos))).drops();
-        }
-    }
-
     @Override
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand,
                                           @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof SleighConstructionTableBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (SleighConstructionTableBlockEntity)entity, pPos);
-            } else {
-                throw new IllegalStateException("The Sleigh Construction Table container provider is missing.");
-            }
+            NetworkHooks.openScreen(((ServerPlayer)pPlayer), getMenuProvider(pState, pLevel, pPos));
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
-    @Override
-    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        return new SleighConstructionTableBlockEntity(blockPos, blockState);
+    private boolean hasExtension(BlockState pState, Level pLevel, BlockPos pPos) {
+        return (pState.getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
+                (pLevel.getBlockState(pPos.north()).getBlock() instanceof SleighConstructionTableBlock
+                        && pLevel.getBlockState(pPos.north()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
+                (pLevel.getBlockState(pPos.east()).getBlock() instanceof SleighConstructionTableBlock
+                        && pLevel.getBlockState(pPos.east()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
+                (pLevel.getBlockState(pPos.south()).getBlock() instanceof SleighConstructionTableBlock
+                        && pLevel.getBlockState(pPos.south()).getValue(TYPE) == SleighConstructionTableType.EXTENSION) ||
+                (pLevel.getBlockState(pPos.west()).getBlock() instanceof SleighConstructionTableBlock
+                        && pLevel.getBlockState(pPos.west()).getValue(TYPE) == SleighConstructionTableType.EXTENSION);
     }
 
-    @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @NotNull BlockState pState,
-                                                                            @NotNull BlockEntityType<T> pBlockEntityType) {
-        if (pLevel.isClientSide()) {
-            return null;
-        }
-
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.SLEIGH_CONSTRUCTION_TABLE_BE.get(),
-                (pLevel1, pPos, pState1,
-                 pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+    @Nullable
+    @SuppressWarnings("deprecation")
+    public MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
+        return new SimpleMenuProvider((windowId, inventory, player) ->
+                new SleighConstructionTableMenu(windowId, inventory, null,
+                        ContainerLevelAccess.create(pLevel, pPos), hasExtension(pState, pLevel, pPos)),
+                CONTAINER_TITLE);
     }
 
     @Override

@@ -4,12 +4,12 @@ import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 public enum SleighConstructionTableType implements StringRepresentable {
-    LEFT("left"),
-    RIGHT("right");
+    MAIN("main"),
+    EXTENSION("extension");
 
     private final String name;
 
-    private SleighConstructionTableType(String pName) {
+    SleighConstructionTableType(String pName) {
         this.name = pName;
     }
 
@@ -20,8 +20,8 @@ public enum SleighConstructionTableType implements StringRepresentable {
     public SleighConstructionTableType getOpposite() {
 
         return switch (this) {
-            case LEFT -> RIGHT;
-            case RIGHT -> LEFT;
+            case MAIN -> EXTENSION;
+            case EXTENSION -> MAIN;
         };
     }
 }
