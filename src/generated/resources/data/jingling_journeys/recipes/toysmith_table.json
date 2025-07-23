@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "forge:rods/wooden"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "T": {
+      "tag": "minecraft:wool"
+    },
+    "s": {
+      "tag": "forge:shears"
+    },
+    "t": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    " St",
+    "sTN",
+    "PPP"
+  ],
+  "result": {
+    "item": "jingling_journeys:toysmith_table"
+  },
+  "show_notification": true
+}

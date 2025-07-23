@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jingling_journeys:item/example_gummy_candy"
+  }
+}

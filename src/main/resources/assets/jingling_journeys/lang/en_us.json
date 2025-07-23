@@ -1,0 +1,16 @@
+{
+  "itemGroup.jingling_journeys.creative_tab": "Jingling Journeys",
+  "item.jingling_journeys.candy_cane": "Candy Cane",
+  "item.jingling_journeys.sharpened_candy_cane": "Sharpened Candy Cane",
+  "item.jingling_journeys.example_gummy_candy": "Example Gummy Candy",
+  "item.jingling_journeys.example_wrapped_candy": "Example Wrapped Candy",
+  "item.jingling_journeys.generic_small_sled": "Generic Small Sled",
+
+  "block.jingling_journeys.sleigh_construction_table": "Sleigh Construction Table",
+  "block.jingling_journeys.leatherworker_table": "Leatherworker Table",
+  "block.jingling_journeys.toysmith_table": "Toysmith Table",
+
+  "container.jingling_journeys.sleigh_construction_table": "Sleigh Construction Table",
+  "container.jingling_journeys.leatherworker_table": "Leatherworker Table",
+  "container.jingling_journeys.toysmith_table": "Toysmith Table"
+}

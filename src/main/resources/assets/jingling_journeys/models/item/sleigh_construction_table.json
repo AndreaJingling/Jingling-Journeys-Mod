@@ -1,0 +1,44 @@
+{
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [ -8, 0, 0 ],
+      "to": [ 8, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#down_main", "cullface": "down", "rotation":  180, "uv": [0, 0, 16, 16] },
+        "up":    { "texture": "#up_main", "cullface": "up", "uv": [0, 0, 16, 16] },
+        "north": { "texture": "#north_main", "cullface": "north", "uv": [0, 0, 16, 16] },
+        "south": { "texture": "#south_main", "cullface": "south", "uv": [0, 0, 16, 16] },
+        "west":  { "texture": "#west_main", "cullface": "west", "rotation":  270, "uv": [0, 0, 16, 16] },
+        "east":  { "texture": "#east_main", "cullface": "east", "rotation":  90, "uv": [0, 0, 16, 16] }
+      }
+    },
+    {
+      "from": [ 8, 0, 0 ],
+      "to": [ 24, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#down_extension", "cullface": "down", "rotation":  180, "uv": [0, 0, 16, 16] },
+        "up":    { "texture": "#up_extension", "cullface": "up", "uv": [0, 0, 16, 16] },
+        "north": { "texture": "#north_extension", "cullface": "north", "uv": [0, 0, 16, 16] },
+        "south": { "texture": "#south_extension", "cullface": "south", "uv": [0, 0, 16, 16] },
+        "west":  { "texture": "#west_extension", "cullface": "west", "rotation":  270, "uv": [0, 0, 16, 16] },
+        "east":  { "texture": "#east_extension", "cullface": "east", "rotation":  90, "uv": [0, 0, 16, 16] }
+      }
+    }
+  ],
+  "render_type": "translucent",
+  "textures": {
+    "up_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "down_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "north_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "east_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "south_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "west_main": "jingling_journeys:block/sleigh_construction_table_main",
+    "up_extension": "jingling_journeys:block/sleigh_construction_table_extension",
+    "down_extension": "jingling_journeys:block/sleigh_construction_table_extension",
+    "north_extension": "jingling_journeys:block/sleigh_construction_table_extension",
+    "east_extension": "jingling_journeys:block/sleigh_construction_table_extension",
+    "south_extension": "jingling_journeys:block/sleigh_construction_table_extension",
+    "west_extension": "jingling_journeys:block/sleigh_construction_table_extension"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "jingling_journeys:add_item",
+  "conditions": [
+    {
+      "chance": 0.125,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/nether_bridge"
+    }
+  ],
+  "item": "jingling_journeys:example_gummy_candy",
+  "max_count": 5,
+  "min_count": 1
+}

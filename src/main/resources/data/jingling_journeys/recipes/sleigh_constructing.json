@@ -1,0 +1,18 @@
+{
+  "type": "jingling_journeys:sleigh_constructing",
+  "category": "misc",
+  "pattern": [
+    "SSSSSS",
+    "SSSSSS",
+    "SSSSSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "jingling_journeys:generic_small_sled",
+    "count": 1
+  }
+}

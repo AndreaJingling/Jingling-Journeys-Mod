@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-21T20:06:58.2059965	Loot Tables
-7c686ba50e2b26dd910db7d17bc44c41157fc562 data/holiday_mod/loot_tables/blocks/leatherworker_table.json
-edca9190a361f6d71c3a69c64fb33619d1f0c440 data/holiday_mod/loot_tables/blocks/sleigh_construction_table.json
-c49f33d01d5737650b37e2af27b17f4b36f08b0c data/holiday_mod/loot_tables/blocks/toysmith_table.json
+// 1.20.1	2025-07-22T21:10:27.277238605	Loot Tables
+e75f12f8dd1df7422dfb6a10a269a37b37e83726 data/jingling_journeys/loot_tables/blocks/leatherworker_table.json
+b6f524b127dace3984fe05270e5440f7a5ef8ff1 data/jingling_journeys/loot_tables/blocks/sleigh_construction_table.json
+59eba9cc5737778e5a5ec48719ef8292f73f2438 data/jingling_journeys/loot_tables/blocks/toysmith_table.json
