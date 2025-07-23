@@ -18,12 +18,18 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.level.block.entity;
+package jingling_journeys.tags;
 
-public class ModBlockEntities {
+import jingling_journeys.Main;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
-    // Used to load this class at the needed time from main.
-    public static void init() {
+import java.util.Objects;
 
-    }
+public class ModItemTags {
+    public static final TagKey<Item> CAN_LIGHT_FIREPLACES =
+            TagKey.create(Registries.ITEM,
+                    (Objects.requireNonNull(ResourceLocation.tryBuild(Main.MOD_ID, "can_light_fireplaces"))));
 }

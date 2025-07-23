@@ -18,12 +18,20 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.level.block.entity;
+package jingling_journeys.tags;
 
-public class ModBlockEntities {
+import jingling_journeys.Main;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import java.util.Objects;
 
-    // Used to load this class at the needed time from main.
-    public static void init() {
-
-    }
+public class ModEntityTypeTags {
+    public static final TagKey<EntityType<?>> ELFLIKES =
+            TagKey.create(Registries.ENTITY_TYPE,
+                    (Objects.requireNonNull(ResourceLocation.tryBuild(Main.MOD_ID, "elflikes"))));
+    public static final TagKey<EntityType<?>> SLEIGHS =
+            TagKey.create(Registries.ENTITY_TYPE,
+                    (Objects.requireNonNull(ResourceLocation.tryBuild(Main.MOD_ID, "sleighs"))));
 }

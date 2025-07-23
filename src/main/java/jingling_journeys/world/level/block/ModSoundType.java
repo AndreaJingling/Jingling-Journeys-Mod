@@ -18,12 +18,15 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.level.block.entity;
+package jingling_journeys.world.level.block;
 
-public class ModBlockEntities {
+import jingling_journeys.sounds.ModSoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraftforge.common.util.ForgeSoundType;
 
-    // Used to load this class at the needed time from main.
-    public static void init() {
-
-    }
+public class ModSoundType {
+    public static final SoundType FIREPLACE = new ForgeSoundType(1.0F, 1.0F,
+            ModSoundEvents.FIREPLACE_BREAK, () -> SoundEvents.WOOD_STEP, ModSoundEvents.FIREPLACE_PLACE,
+            () -> SoundEvents.WOOD_HIT, () -> SoundEvents.WOOD_FALL);
 }

@@ -45,6 +45,7 @@ public class ModEntityTypes {
                     .clientTrackingRange(10)
                     .build("generic_small_sled"));
 
+    // Used to load this class at the needed time from main.
     public static void init() {
     }
 

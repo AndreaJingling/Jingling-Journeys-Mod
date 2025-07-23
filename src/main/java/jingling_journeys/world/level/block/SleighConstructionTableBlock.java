@@ -54,7 +54,7 @@ public class SleighConstructionTableBlock extends Block {
             ModBlockStateProperties.SLEIGH_CONSTRUCTION_TABLE_TYPE;
 
     public SleighConstructionTableBlock(Properties pProperties) {
-        super(pProperties);
+        super(pProperties.sound(SoundType.WOOD));
     }
 
     @SuppressWarnings("deprecation")

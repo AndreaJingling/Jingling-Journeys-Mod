@@ -23,24 +23,32 @@ package jingling_journeys.world.level.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class FireplaceBlock extends Block {
+    public static final int LIGHT_LEVEL_FIREPLACE = 15;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public FireplaceBlock(Properties pProperties) {
-        super(pProperties);
+        super(pProperties.lightLevel((p_50763_) ->
+                p_50763_.getValue(BlockStateProperties.LIT) ? LIGHT_LEVEL_FIREPLACE : 0)
+                .sound(ModSoundType.FIREPLACE));
     }
 
     @SuppressWarnings("deprecation")
@@ -55,19 +63,21 @@ public class FireplaceBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING).add(LIT);
     }
-
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
+                .setValue(LIT, false);
     }
 
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos,
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand,
                                           @NotNull BlockHitResult pHit) {
+        // TODO Implement lighting with flint and steel and other items.
         return InteractionResult.PASS; // TODO Implement Crawling in Chimney and Fireplace
     }
 }

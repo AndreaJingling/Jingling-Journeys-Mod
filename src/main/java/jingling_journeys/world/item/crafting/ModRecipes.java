@@ -30,6 +30,7 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<SleighConstructionTableRecipe>> SLEIGH_CONSTRUCTION_TABLE_SERIALIZER
             = RECIPES.register("sleigh_constructing", () -> SleighConstructionTableRecipe.Serializer.INSTANCE);
 
+    // Used to load this class at the needed time from main.
     public static void init() {
 
     }

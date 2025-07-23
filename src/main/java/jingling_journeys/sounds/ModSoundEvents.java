@@ -57,6 +57,7 @@ public class ModSoundEvents {
                 Objects.requireNonNull(ResourceLocation.tryBuild(Main.MOD_ID, id))));
     }
 
+    // Used to load this class at the needed time from main.
     public static void init() {
     }
 }

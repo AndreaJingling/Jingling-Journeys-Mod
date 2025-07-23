@@ -29,6 +29,7 @@ public class ModRecipeTypes {
     public static final RegistryObject<RecipeType<SleighConstructionTableRecipe>> SLEIGH_CONSTRUCTION_TYPE =
             Main.RECIPE_TYPES.register("sleigh_constructing", () ->  SleighConstructionTableRecipe.Type.INSTANCE);
 
+    // Used to load this class at the needed time from main.
     public static void init() {
     }
 }
