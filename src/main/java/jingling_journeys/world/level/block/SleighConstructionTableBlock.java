@@ -1,20 +1,20 @@
 /**
- *         Minecraft Holiday Mod (WIP description)<br>
- *         Copyright (C) 2025  Minecraft Holiday Mod Team (WIP name)<br>
+ *         Jingling Journeys (WIP description)<br>
+ *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
  *         <br>
- *         This file part of Minecraft Holiday Mod.<br>
+ *         This file part of Jingling Journeys.<br>
  *         <br>
  *         This program is free software: you can redistribute it and/or modify<br>
- *         it under the terms of the GNU General Public License as published by<br>
+ *         it under the terms of the GNU Lesser General Public License as published by<br>
  *         the Free Software Foundation, either version 3 of the License, or<br>
  *         (at your option) any later version.<br>
  *         <br>
  *         This program is distributed in the hope that it will be useful,<br>
  *         but WITHOUT ANY WARRANTY; without even the implied warranty of<br>
  *         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>
- *         GNU General Public License for more details.<br>
+ *         GNU Lesser General Public License for more details.<br>
  *         <br>
- *         You should have received a copy of the GNU General Public License<br>
+ *         You should have received a copy of the GNU Lesser General Public License<br>
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
@@ -112,6 +112,7 @@ public class SleighConstructionTableBlock extends Block {
                                           @NotNull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             // NetworkHooks.openScreen(((ServerPlayer)pPlayer), getMenuProvider(pState, pLevel, pPos));
+            // TODO Fix Sleigh Construction Table Menu
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
@@ -139,12 +140,12 @@ public class SleighConstructionTableBlock extends Block {
                                            @NotNull BlockPos pCurrentPos,
                                            @NotNull BlockPos pFacingPos) {
         if (pFacingState.is(this) && pFacing.getAxis().isHorizontal()) {
-            SleighConstructionTableType sleighConstructionTableType = pFacingState.getValue(TYPE);
+            SleighConstructionTableType facingSleighConstructionTableType = pFacingState.getValue(TYPE);
             if (pState.getValue(TYPE) == SleighConstructionTableType.MAIN
-                    && sleighConstructionTableType != SleighConstructionTableType.MAIN
+                    && facingSleighConstructionTableType != SleighConstructionTableType.MAIN
                     && pState.getValue(FACING) == pFacingState.getValue(FACING)
                     && getConnectedDirection(pFacingState) == pFacing.getOpposite()) {
-                return pState.setValue(TYPE, sleighConstructionTableType.getOpposite());
+                return pState.setValue(TYPE, SleighConstructionTableType.MAIN);
             }
         } else if (getConnectedDirection(pState).getOpposite() == pFacing) {
             if (!pLevel.isClientSide()) {

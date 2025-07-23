@@ -1,4 +1,6 @@
-// 1.20.1	2025-07-22T21:10:27.277238605	Loot Tables
+// 1.20.1	2025-07-23T13:08:11.247882195	Loot Tables
+c1c7d2f618c6e8401eff64e1c96de8bd81a26871 data/jingling_journeys/loot_tables/blocks/chimney.json
+97e0be20a9e1e110a0d9f2ae40014c35aa05218c data/jingling_journeys/loot_tables/blocks/fireplace.json
 e75f12f8dd1df7422dfb6a10a269a37b37e83726 data/jingling_journeys/loot_tables/blocks/leatherworker_table.json
 b6f524b127dace3984fe05270e5440f7a5ef8ff1 data/jingling_journeys/loot_tables/blocks/sleigh_construction_table.json
 59eba9cc5737778e5a5ec48719ef8292f73f2438 data/jingling_journeys/loot_tables/blocks/toysmith_table.json

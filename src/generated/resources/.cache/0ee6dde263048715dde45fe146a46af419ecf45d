@@ -1,6 +1,10 @@
-// 1.20.1	2025-07-22T21:10:27.276962392	Block States: jingling_journeys
+// 1.20.1	2025-07-23T13:08:11.244945653	Block States: jingling_journeys
+e72ec1bb46c1e3aa6d4ba26b587da9a6c4987e12 assets/jingling_journeys/blockstates/chimney.json
+94ccd7ce1a319b755a108faba2a70c6da28c6bd0 assets/jingling_journeys/blockstates/fireplace.json
 02b3cb412d04c1767baa0a671b1c51d13ae99542 assets/jingling_journeys/blockstates/leatherworker_table.json
 aead7b9cad23ef6854c3333e2502c963c8490d08 assets/jingling_journeys/blockstates/sleigh_construction_table.json
 01ff1850cdef6c076c4cd30a85d7cf3a640c4433 assets/jingling_journeys/blockstates/toysmith_table.json
+8a2b8a208a980b2fb1c8b552e7a38f593737c2c1 assets/jingling_journeys/models/item/chimney.json
+42070d605d2f1833984799991c58c905e59e7413 assets/jingling_journeys/models/item/fireplace.json
 b0345fed841689278cdeea2ccbef42bf5245d258 assets/jingling_journeys/models/item/leatherworker_table.json
 ee17cfb80b7c5e83731ad38cf51dde4821bdb94f assets/jingling_journeys/models/item/toysmith_table.json

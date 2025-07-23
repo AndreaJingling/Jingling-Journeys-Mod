@@ -11,14 +11,14 @@ Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.
 
 This version of the GNU Lesser General Public License incorporates the
-terms and conditions of version 3 of the GNU General Public License,
+terms and conditions of version 3 of the GNU Lesser General Public License,
 supplemented by the additional permissions listed below.
 
 ## 0. Additional Definitions.
 
 As used herein, "this License" refers to version 3 of the GNU Lesser
 General Public License, and the "GNU GPL" refers to version 3 of the
-GNU General Public License.
+GNU Lesser General Public License.
 
 "The Library" refers to a covered work governed by this License, other
 than an Application or a Combined Work as defined below.
@@ -158,7 +158,7 @@ apply, that proxy's public statement of acceptance of any version is
 permanent authorization for you to choose that version for the
 Library.
 
-# GNU GENERAL PUBLIC LICENSE
+# GNU Lesser General Public License
 
 Version 3, 29 June 2007
 
@@ -170,15 +170,15 @@ license document, but changing it is not allowed.
 
 ## Preamble
 
-The GNU General Public License is a free, copyleft license for
+The GNU Lesser General Public License is a free, copyleft license for
 software and other kinds of works.
 
 The licenses for most software and other practical works are designed
 to take away your freedom to share and change the works. By contrast,
-the GNU General Public License is intended to guarantee your freedom
+the GNU Lesser General Public License is intended to guarantee your freedom
 to share and change all versions of a program--to make sure it remains
 free software for all its users. We, the Free Software Foundation, use
-the GNU General Public License for most of our software; it applies
+the GNU Lesser General Public License for most of our software; it applies
 also to any other work released this way by its authors. You can apply
 it to your programs, too.
 
@@ -237,7 +237,7 @@ modification follow.
 
 ### 0. Definitions.
 
-"This License" refers to version 3 of the GNU General Public License.
+"This License" refers to version 3 of the GNU Lesser General Public License.
 
 "Copyright" also means copyright-like laws that apply to other kinds
 of works, such as semiconductor masks.
@@ -720,7 +720,7 @@ combination as such.
 ### 14. Revised Versions of this License.
 
 The Free Software Foundation may publish revised and/or new versions
-of the GNU General Public License from time to time. Such new versions
+of the GNU Lesser General Public License from time to time. Such new versions
 will be similar in spirit to the present version, but may differ in
 detail to address new problems or concerns.
 
@@ -734,7 +734,7 @@ License, you may choose any version ever published by the Free
 Software Foundation.
 
 If the Program specifies that a proxy can decide which future versions
-of the GNU General Public License can be used, that proxy's public
+of the GNU Lesser General Public License can be used, that proxy's public
 statement of acceptance of a version permanently authorizes you to
 choose that version for the Program.
 
@@ -794,16 +794,16 @@ the exclusion of warranty; and each file should have at least the
         Copyright (C) <year>  <name of author>
 
         This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
+        it under the terms of the GNU Lesser General Public License as published by
         the Free Software Foundation, either version 3 of the License, or
         (at your option) any later version.
 
         This program is distributed in the hope that it will be useful,
         but WITHOUT ANY WARRANTY; without even the implied warranty of
         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
+        GNU Lesser General Public License for more details.
 
-        You should have received a copy of the GNU General Public License
+        You should have received a copy of the GNU Lesser General Public License
         along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Also add information on how to contact you by electronic and paper
@@ -827,7 +827,7 @@ school, if any, to sign a "copyright disclaimer" for the program, if
 necessary. For more information on this, and how to apply and follow
 the GNU GPL, see <https://www.gnu.org/licenses/>.
 
-The GNU General Public License does not permit incorporating your
+The GNU Lesser General Public License does not permit incorporating your
 program into proprietary programs. If your program is a subroutine
 library, you may consider it more useful to permit linking proprietary
 applications with the library. If this is what you want to do, use the

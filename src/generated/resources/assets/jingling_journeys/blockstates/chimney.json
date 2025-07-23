@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=connection": {
+      "model": "jingling_journeys:block/chimney_connection"
+    },
+    "type=top": {
+      "model": "jingling_journeys:block/chimney_top"
+    }
+  }
+}

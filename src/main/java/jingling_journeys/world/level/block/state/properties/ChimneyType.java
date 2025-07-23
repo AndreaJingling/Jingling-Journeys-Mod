@@ -18,17 +18,22 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.item.crafting;
+package jingling_journeys.world.level.block.state.properties;
 
-import jingling_journeys.Main;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
-public class ModRecipeTypes {
-    @SuppressWarnings("unused")
-    public static final RegistryObject<RecipeType<SleighConstructionTableRecipe>> SLEIGH_CONSTRUCTION_TYPE =
-            Main.RECIPE_TYPES.register("sleigh_constructing", () ->  SleighConstructionTableRecipe.Type.INSTANCE);
+public enum ChimneyType implements StringRepresentable {
+    CONNECTION("connection"),
+    TOP("top");
 
-    public static void init() {
+    private final String name;
+
+    ChimneyType(String pName) {
+        this.name = pName;
+    }
+
+    public @NotNull String getSerializedName() {
+        return this.name;
     }
 }

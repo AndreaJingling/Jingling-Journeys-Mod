@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube_directional",
+  "render_type": "translucent",
+  "textures": {
+    "up": "jingling_journeys:block/chimney_connection_ends",
+    "down": "jingling_journeys:block/chimney_connection_ends",
+    "north": "jingling_journeys:block/chimney_connection_sides",
+    "south": "jingling_journeys:block/chimney_connection_sides",
+    "east": "jingling_journeys:block/chimney_connection_sides",
+    "west": "jingling_journeys:block/chimney_connection_sides"
+  }
+}
