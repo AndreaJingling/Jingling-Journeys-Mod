@@ -5,7 +5,7 @@ package jingling_journeys.client.model.entity.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import holiday_mod.Main;
+import jingling_journeys.Main;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
