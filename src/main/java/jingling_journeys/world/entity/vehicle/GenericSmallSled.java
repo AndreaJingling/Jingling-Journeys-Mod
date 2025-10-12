@@ -18,53 +18,53 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.entity.npc;
+package jingling_journeys.world.entity.vehicle;
 
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import jingling_journeys.world.entity.ModEntityTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ElfEntity extends ElflikeEntity {
+public class GenericSmallSled extends Sled {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    public ElfEntity(EntityType<? extends ElfEntity> pEntityType, Level pLevel) {
+    public GenericSmallSled(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    @Override
-    public @Nullable AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {
-        return null;
-    }
-
-
-
-    @Override
-    public @NotNull SoundEvent getNotifyTradeSound() {
-        return null;
+    public GenericSmallSled(Level pLevel, double pX, double pY, double pZ) {
+        this(ModEntityTypes.genericSmallSledEntityType.get(), pLevel);
+        this.setPos(pX, pY, pZ);
     }
 
     @Override
-    public boolean isClientSide() {
-        return this.level().isClientSide;
+    protected void defineSynchedData() {
+
     }
 
-    protected float getStandingEyeHeight(@NotNull Pose pPose, @NotNull EntityDimensions pSize) {
-        return 0.8125F;// this.isBaby() ? 0.8125F : 0.8125F; // TODO Implement eye height of Baby Elf
+    @Override
+    protected void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
+
     }
 
+    @Override
+    protected void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                .add(Attributes.FOLLOW_RANGE, 48.0D);
+    }
+
+    @Override
+    protected float getEyeHeight(@NotNull Pose pPose, EntityDimensions pDimensions) {
+        return pDimensions.height;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     @Override

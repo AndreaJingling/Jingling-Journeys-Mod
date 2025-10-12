@@ -18,26 +18,27 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.client.renderer.entity;
+package jingling_journeys.world.entity.vehicle;
 
-import jingling_journeys.client.model.entity.AbstractSleighModel;
-import jingling_journeys.world.entity.vehicle.AbstractSleigh;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import software.bernie.geckolib.animatable.GeoEntity;
 
-@OnlyIn(Dist.CLIENT)
-public class AbstractSleighRenderer
-extends GeoEntityRenderer<AbstractSleigh> {
-    public AbstractSleighRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new AbstractSleighModel());
+public abstract class AbstractSleigh extends Entity implements GeoEntity {
+    private boolean inputLeft;
+    private boolean inputRight;
+    private boolean inputUp;
+    private boolean inputDown;
+
+    public AbstractSleigh(EntityType<?> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
     }
 
-    @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull AbstractSleigh entity) {
-        return this.model.getTextureResource(entity);
+    public void setInput(boolean pInputLeft, boolean pInputRight, boolean pInputUp, boolean pInputDown) {
+        this.inputLeft = pInputLeft;
+        this.inputRight = pInputRight;
+        this.inputUp = pInputUp;
+        this.inputDown = pInputDown;
     }
 }

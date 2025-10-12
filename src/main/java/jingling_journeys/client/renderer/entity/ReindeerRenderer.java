@@ -18,27 +18,28 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.world.entity.vehicle;
+package jingling_journeys.client.renderer.entity;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.Level;
-import software.bernie.geckolib.animatable.GeoEntity;
+import jingling_journeys.client.model.entity.ElflikeModel;
+import jingling_journeys.client.model.entity.ReindeerModel;
+import jingling_journeys.world.entity.animal.Reindeer;
+import jingling_journeys.world.entity.npc.Elflike;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public abstract class AbstractSleighEntity extends Entity implements GeoEntity {
-    private boolean inputLeft;
-    private boolean inputRight;
-    private boolean inputUp;
-    private boolean inputDown;
-
-    public AbstractSleighEntity(EntityType<?> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+@OnlyIn(Dist.CLIENT)
+public class ReindeerRenderer
+extends GeoEntityRenderer<Reindeer> {
+    public ReindeerRenderer(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new ReindeerModel());
     }
 
-    public void setInput(boolean pInputLeft, boolean pInputRight, boolean pInputUp, boolean pInputDown) {
-        this.inputLeft = pInputLeft;
-        this.inputRight = pInputRight;
-        this.inputUp = pInputUp;
-        this.inputDown = pInputDown;
+    @Override
+    public @NotNull ResourceLocation getTextureLocation(@NotNull Reindeer entity) {
+        return this.model.getTextureResource(entity);
     }
 }

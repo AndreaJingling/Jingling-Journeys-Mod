@@ -23,11 +23,13 @@ package jingling_journeys;
 import com.mojang.datafixers.util.Pair;
 import jingling_journeys.client.renderer.entity.AbstractSleighRenderer;
 import jingling_journeys.client.renderer.entity.ElflikeRenderer;
+import jingling_journeys.client.renderer.entity.ReindeerRenderer;
 import jingling_journeys.loot.ModLootModifiers;
 import jingling_journeys.client.gui.screens.inventory.SleighConstructionTableScreen;
 import jingling_journeys.sounds.ModSoundEvents;
 import jingling_journeys.world.entity.ModEntityTypes;
-import jingling_journeys.world.entity.npc.ElfEntity;
+import jingling_journeys.world.entity.animal.Reindeer;
+import jingling_journeys.world.entity.npc.Elf;
 import jingling_journeys.world.inventory.ModMenuTypes;
 import jingling_journeys.world.inventory.SleighConstructionTableMenu;
 import jingling_journeys.world.item.ModCreativeTabs;
@@ -256,7 +258,8 @@ public class Main {
         @SubscribeEvent
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
             LOGGER.info("EntityAttributeCreationEvent");
-            event.put(ModEntityTypes.elfEntityType.get(), ElfEntity.createAttributes().build());
+            event.put(ModEntityTypes.elfEntityType.get(), Elf.createAttributes().build());
+            event.put(ModEntityTypes.reindeerEntityType.get(), Reindeer.createAttributes().build());
         }
     }
 
@@ -280,6 +283,7 @@ public class Main {
         public static void onEntityRegisterRenderersEvent(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntityTypes.elfEntityType.get(), ElflikeRenderer::new);
             event.registerEntityRenderer(ModEntityTypes.genericSmallSledEntityType.get(), AbstractSleighRenderer::new);
+            event.registerEntityRenderer(ModEntityTypes.reindeerEntityType.get(), ReindeerRenderer::new);
         }
     }
 }

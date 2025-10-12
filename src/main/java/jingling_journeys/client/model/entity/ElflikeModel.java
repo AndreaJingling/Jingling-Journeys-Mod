@@ -22,7 +22,7 @@ package jingling_journeys.client.model.entity;
 
 import jingling_journeys.Main;
 import jingling_journeys.world.entity.ModEntityTypes;
-import jingling_journeys.world.entity.npc.ElflikeEntity;
+import jingling_journeys.world.entity.npc.Elflike;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +30,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.model.GeoModel;
 
 @OnlyIn(Dist.CLIENT)
-public class ElflikeModel extends GeoModel<ElflikeEntity> {
+public class ElflikeModel extends GeoModel<Elflike> {
     private static final ResourceLocation ELF_TEXTURE =
             ResourceLocation.tryBuild(Main.MOD_ID, "textures/entity/elflike/elf.png");
 
@@ -41,24 +41,24 @@ public class ElflikeModel extends GeoModel<ElflikeEntity> {
             ResourceLocation.tryBuild(Main.MOD_ID, "animations/entity/elf.animation.json");
 
     @Override
-    public ResourceLocation getTextureResource(ElflikeEntity animatable) {
+    public ResourceLocation getTextureResource(Elflike animatable) {
         return getResourceLocation(animatable, ELF_TEXTURE);
     }
 
     @Override
-    public ResourceLocation getModelResource(ElflikeEntity animatable) {
+    public ResourceLocation getModelResource(Elflike animatable) {
         return getResourceLocation(animatable, ELF_MODEL);
     }
 
     @Override
-    public ResourceLocation getAnimationResource(ElflikeEntity animatable) {
+    public ResourceLocation getAnimationResource(Elflike animatable) {
         return getResourceLocation(animatable, ELF_ANIMATION);
     }
 
-    private ResourceLocation getResourceLocation(ElflikeEntity animatable,
+    private ResourceLocation getResourceLocation(Elflike animatable,
                                                  ResourceLocation elfResource) {
-        @SuppressWarnings("unchecked") EntityType<ElflikeEntity> type =
-                (EntityType<ElflikeEntity>) animatable.getType();
+        @SuppressWarnings("unchecked") EntityType<Elflike> type =
+                (EntityType<Elflike>) animatable.getType();
         if(ModEntityTypes.elfEntityType.get().equals(type))
         {
             return elfResource;

@@ -21,7 +21,7 @@
 package jingling_journeys.client.renderer.entity;
 
 import jingling_journeys.client.model.entity.ElflikeModel;
-import jingling_journeys.world.entity.npc.ElflikeEntity;
+import jingling_journeys.world.entity.npc.Elflike;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -31,13 +31,13 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class ElflikeRenderer
-extends GeoEntityRenderer<ElflikeEntity> {
+extends GeoEntityRenderer<Elflike> {
     public ElflikeRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ElflikeModel());
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull ElflikeEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull Elflike entity) {
         return this.model.getTextureResource(entity);
     }
 }

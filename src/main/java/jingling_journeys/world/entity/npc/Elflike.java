@@ -35,8 +35,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 
-public abstract class ElflikeEntity extends AgeableMob implements InventoryCarrier, Npc, Merchant, GeoEntity {
-    protected ElflikeEntity(EntityType<? extends ElflikeEntity> pEntityType, Level pLevel) {
+public abstract class Elflike extends AgeableMob implements InventoryCarrier, Npc, Merchant, GeoEntity {
+    protected Elflike(EntityType<? extends Elflike> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

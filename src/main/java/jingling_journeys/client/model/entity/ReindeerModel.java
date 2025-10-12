@@ -18,26 +18,38 @@
  *         along with this program.  If not, see <https://www.gnu.org/licenses/>.<br>
  */
 
-package jingling_journeys.client.renderer.entity;
+package jingling_journeys.client.model.entity;
 
-import jingling_journeys.client.model.entity.AbstractSleighModel;
-import jingling_journeys.world.entity.vehicle.AbstractSleigh;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import jingling_journeys.Main;
+import jingling_journeys.world.entity.animal.Reindeer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.model.GeoModel;
 
 @OnlyIn(Dist.CLIENT)
-public class AbstractSleighRenderer
-extends GeoEntityRenderer<AbstractSleigh> {
-    public AbstractSleighRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new AbstractSleighModel());
+public class ReindeerModel extends GeoModel<Reindeer> {
+    private static final ResourceLocation REINDEER_TEXTURE =
+            ResourceLocation.tryBuild(Main.MOD_ID, "textures/entity/reindeer/reindeer_normal.png");
+
+    private static final ResourceLocation REINDEER_MODEL =
+            ResourceLocation.tryBuild(Main.MOD_ID, "geo/entity/reindeer.geo.json");
+
+    private static final ResourceLocation REINDEER_ANIMATION =
+            ResourceLocation.tryBuild(Main.MOD_ID, "animations/entity/reindeer.animation.json");
+
+    @Override
+    public ResourceLocation getTextureResource(Reindeer animatable) {
+        return REINDEER_TEXTURE; // TODO Implement Textures
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull AbstractSleigh entity) {
-        return this.model.getTextureResource(entity);
+    public ResourceLocation getModelResource(Reindeer animatable) {
+        return REINDEER_MODEL;
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(Reindeer animatable) {
+        return REINDEER_ANIMATION;
     }
 }

@@ -49,13 +49,17 @@ public class ModItems {
             register("sharpened_candy_cane", SharpenedCandyCane::new, SharpenedCandyCane.getProperties(),
                     true);
     public static final RegistryObject<Item> GENERIC_SMALL_SLED =
-            register("generic_small_sled", SleighItem::new, SleighItem.getProperties(),
-                    false);
+            register("generic_small_sled", SleighItem::new, SleighItem.getProperties());
     public static final RegistryObject<Item> ELF_SPAWN_EGG =
             register("elf_spawn_egg", (Item.Properties itemProperties) ->
                     new ForgeSpawnEggItem(ModEntityTypes.elfEntityType,
                             0x095207, 0x520707, itemProperties),
-                    new Item.Properties(), false);
+                    new Item.Properties());
+    public static final RegistryObject<Item> REINDEER_SPAWN_EGG =
+            register("reindeer_spawn_egg", (Item.Properties itemProperties) ->
+                            new ForgeSpawnEggItem(ModEntityTypes.reindeerEntityType,
+                                    0x000000, 0x000000, itemProperties),
+                    new Item.Properties());
 
     // This can handle any candy that only applies a buff on eating, currently only speed.
     public static RegistryObject<Item> registerSimpleCandy(String id,

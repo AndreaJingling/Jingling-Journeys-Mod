@@ -22,7 +22,7 @@ package jingling_journeys.client.model.entity;
 
 import jingling_journeys.Main;
 import jingling_journeys.world.entity.ModEntityTypes;
-import jingling_journeys.world.entity.vehicle.AbstractSleighEntity;
+import jingling_journeys.world.entity.vehicle.AbstractSleigh;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +30,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.model.GeoModel;
 
 @OnlyIn(Dist.CLIENT)
-public class AbstractSleighModel extends GeoModel<AbstractSleighEntity> {
+public class AbstractSleighModel extends GeoModel<AbstractSleigh> {
     private static final ResourceLocation GENERIC_SMALL_SLED_TEXTURE =
             ResourceLocation.tryBuild(Main.MOD_ID, "textures/entity/sleigh/generic_small_sled.png");
 
@@ -41,24 +41,24 @@ public class AbstractSleighModel extends GeoModel<AbstractSleighEntity> {
             ResourceLocation.tryBuild(Main.MOD_ID, "animations/entity/generic_small_sled.animation.json");
 
     @Override
-    public ResourceLocation getTextureResource(AbstractSleighEntity animatable) {
+    public ResourceLocation getTextureResource(AbstractSleigh animatable) {
         return getResourceLocation(animatable, GENERIC_SMALL_SLED_TEXTURE);
     }
 
     @Override
-    public ResourceLocation getModelResource(AbstractSleighEntity animatable) {
+    public ResourceLocation getModelResource(AbstractSleigh animatable) {
         return getResourceLocation(animatable, GENERIC_SMALL_SLED_MODEL);
     }
 
     @Override
-    public ResourceLocation getAnimationResource(AbstractSleighEntity animatable) {
+    public ResourceLocation getAnimationResource(AbstractSleigh animatable) {
         return getResourceLocation(animatable, GENERIC_SMALL_SLED_ANIMATION);
     }
 
-    private ResourceLocation getResourceLocation(AbstractSleighEntity animatable,
+    private ResourceLocation getResourceLocation(AbstractSleigh animatable,
                                                  ResourceLocation genericSmallSledResource) {
-        @SuppressWarnings("unchecked") EntityType<AbstractSleighEntity> type =
-                (EntityType<AbstractSleighEntity>) animatable.getType();
+        @SuppressWarnings("unchecked") EntityType<AbstractSleigh> type =
+                (EntityType<AbstractSleigh>) animatable.getType();
         if(ModEntityTypes.genericSmallSledEntityType.get().equals(type))
         {
             return genericSmallSledResource;

@@ -20,10 +20,13 @@
 
 package jingling_journeys.world.entity;
 
-import jingling_journeys.world.entity.npc.ElfEntity;
-import jingling_journeys.world.entity.vehicle.GenericSmallSledEntity;
+import jingling_journeys.world.entity.animal.Reindeer;
+import jingling_journeys.world.entity.npc.Elf;
+import jingling_journeys.world.entity.vehicle.GenericSmallSled;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
@@ -31,16 +34,22 @@ import java.util.function.Supplier;
 import static jingling_journeys.Main.ENTITY_TYPES;
 
 public class ModEntityTypes {
-    public static final RegistryObject<EntityType<ElfEntity>> elfEntityType
+    public static final RegistryObject<EntityType<Elf>> elfEntityType
             = registerEntity("elf",
-            () -> EntityType.Builder.of(ElfEntity::new, MobCategory.MISC)
+            () -> EntityType.Builder.of(Elf::new, MobCategory.MISC)
                     .sized(0.625F, 0.9375F)
                     .clientTrackingRange(10)
                     .build("elf"));
-    public static final RegistryObject<EntityType<GenericSmallSledEntity>> genericSmallSledEntityType
+    public static final RegistryObject<EntityType<Reindeer>> reindeerEntityType
+            = registerEntity("reindeer",
+            () -> EntityType.Builder.of(Reindeer::new, MobCategory.CREATURE)
+                    .sized(0.625F, 0.9375F)
+                    .clientTrackingRange(10)
+                    .build("reindeer"));
+    public static final RegistryObject<EntityType<GenericSmallSled>> genericSmallSledEntityType
             = registerEntity("generic_small_sled",
             () -> EntityType.Builder.
-                            <GenericSmallSledEntity>of(GenericSmallSledEntity::new, MobCategory.MISC)
+                            <GenericSmallSled>of(GenericSmallSled::new, MobCategory.MISC)
                     .sized(1.0F, 0.5F)
                     .clientTrackingRange(10)
                     .build("generic_small_sled"));

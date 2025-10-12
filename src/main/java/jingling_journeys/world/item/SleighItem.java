@@ -20,8 +20,8 @@
 
 package jingling_journeys.world.item;
 
-import jingling_journeys.world.entity.vehicle.AbstractSleighEntity;
-import jingling_journeys.world.entity.vehicle.GenericSmallSledEntity;
+import jingling_journeys.world.entity.vehicle.AbstractSleigh;
+import jingling_journeys.world.entity.vehicle.GenericSmallSled;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -76,7 +76,7 @@ public class SleighItem extends Item {
             }
 
             if (hitresult.getType() == HitResult.Type.BLOCK) {
-                AbstractSleighEntity sleigh = this.getSleigh(pLevel, hitresult);
+                AbstractSleigh sleigh = this.getSleigh(pLevel, hitresult);
                 sleigh.setYRot(pPlayer.getYRot());
                 if (!pLevel.noCollision(sleigh, sleigh.getBoundingBox())) {
                     return InteractionResultHolder.fail(itemstack);
@@ -98,8 +98,8 @@ public class SleighItem extends Item {
         }
     }
 
-    private AbstractSleighEntity getSleigh(Level pLevel, HitResult pHitResult) {
-        return new GenericSmallSledEntity(pLevel,
+    private AbstractSleigh getSleigh(Level pLevel, HitResult pHitResult) {
+        return new GenericSmallSled(pLevel,
                 pHitResult.getLocation().x, pHitResult.getLocation().y, pHitResult.getLocation().z);
     }
 }
