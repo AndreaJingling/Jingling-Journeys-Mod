@@ -221,23 +221,48 @@ public class Main {
                     .registry(Registries.PROCESSOR_LIST).orElseThrow();
 
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
-                    "jingling_journeys:village/taiga/houses/taiga_homestead_1");
+                    ResourceLocation.tryParse("minecraft:village/desert/houses"),
+                    "jingling_journeys:village/desert/houses/desert_leatherworkers_house_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/desert/houses"),
+                    "jingling_journeys:village/desert/houses/desert_toysmith_house_1");
+
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/plains/houses"),
+                    "jingling_journeys:village/plains/houses/plains_leatherworkers_house_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/plains/houses"),
+                    "jingling_journeys:village/plains/houses/plains_sleigh_construction");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/plains/houses"),
+                    "jingling_journeys:village/plains/houses/plains_toysmith_house_1");
+
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/savanna/houses"),
+                    "jingling_journeys:village/savanna/houses/savanna_leatherworkers_house_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/savanna/houses"),
+                    "jingling_journeys:village/savanna/houses/savanna_toysmith_house_1");
+
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/snowy/houses"),
+                    "jingling_journeys:village/snowy/houses/snowy_leatherworkers_house_1");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/snowy/houses"),
+                    "jingling_journeys:village/snowy/houses/snowy_sleigh_construction");
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    ResourceLocation.tryParse("minecraft:village/snowy/houses"),
+                    "jingling_journeys:village/snowy/houses/snowy_toysmith_house_1");
+
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
                     "jingling_journeys:village/taiga/houses/taiga_leatherworkers_house_1");
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
-                    "jingling_journeys:village/taiga/houses/taiga_pens_1");
-            addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                    ResourceLocation.tryParse("minecraft:village/taiga/houses"),
-                    "jingling_journeys:village/taiga/houses/taiga_sleigh_builder_1");
+                    "jingling_journeys:village/taiga/houses/taiga_sleigh_construction");
             addBuildingToPool(templatePoolRegistry, processorListRegistry,
                     ResourceLocation.tryParse("minecraft:village/taiga/houses"),
                     "jingling_journeys:village/taiga/houses/taiga_toysmith_house_1");
-            //addBuildingToPool(templatePoolRegistry, processorListRegistry,
-            //        ResourceLocation.tryParse("minecraft:village/taiga/houses"),
-            //        "jingling_journeys:test");
         }
     }
 
