@@ -21,16 +21,19 @@
 package jingling_journeys;
 
 import com.mojang.datafixers.util.Pair;
+import jingling_journeys.client.ModRecipeBookCategories;
 import jingling_journeys.client.renderer.entity.AbstractSleighRenderer;
 import jingling_journeys.client.renderer.entity.ElflikeRenderer;
 import jingling_journeys.client.renderer.entity.ReindeerRenderer;
 import jingling_journeys.loot.ModLootModifiers;
 import jingling_journeys.client.gui.screens.inventory.SleighConstructionTableScreen;
 import jingling_journeys.sounds.ModSoundEvents;
+import jingling_journeys.stats.ModStats;
 import jingling_journeys.world.entity.ModEntityTypes;
 import jingling_journeys.world.entity.animal.Reindeer;
 import jingling_journeys.world.entity.npc.Elf;
 import jingling_journeys.world.inventory.ModMenuTypes;
+import jingling_journeys.world.inventory.ModRecipeBookTypes;
 import jingling_journeys.world.inventory.SleighConstructionTableMenu;
 import jingling_journeys.world.item.ModCreativeTabs;
 import jingling_journeys.world.item.ModItems;
@@ -47,6 +50,8 @@ import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.StatType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
@@ -64,6 +69,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -77,6 +83,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,33 +98,29 @@ public class Main {
     public static final String MOD_ID = "jingling_journeys";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    // Create a Deferred Register to hold Blocks which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
-    // Create a Deferred Register to hold Items which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Main.MOD_ID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
-    // Create a Deferred Register to hold EntityTypes which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Main.MOD_ID);
-    // Create a Deferred Register to hold BlockEntities (BlockEntityType) which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Main.MOD_ID);
-    // Create a Deferred Register to hold Menus (MenuTypes) which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, Main.MOD_ID);
-    // Create a Deferred Register to hold Recipes (RecipeSerializer) which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES =
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MOD_ID);
-    // Create a Deferred Register to hold Recipes Types which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
             DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, Main.MOD_ID);
-    // Create a Deferred Register to hold Sound Events which will all be registered under the "jingling_journeys" namespace
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Main.MOD_ID);
+    public static final DeferredRegister<StatType<?>> STAT_TYPES =
+            DeferredRegister.create(ForgeRegistries.STAT_TYPES, Main.MOD_ID);
+    public static final DeferredRegister<ResourceLocation> CUSTOM_STATS =
+            DeferredRegister.create(Registries.CUSTOM_STAT, Main.MOD_ID);
+
 
     static {
         ModItems.init();
@@ -128,30 +131,25 @@ public class Main {
         ModMenuTypes.init();
         ModRecipes.init();
         ModRecipeTypes.init();
+        ModRecipeBookTypes.init();
         ModSoundEvents.init();
+        ModStats.init();
     }
 
     public Main (FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so entity types get registered
         ENTITY_TYPES.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so block entities get registered
         BLOCK_ENTITIES.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so menu types get registered
         MENUS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so recipes get registered
         RECIPES.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so recipe types get registered
         RECIPE_TYPES.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so sound events get registered
         SOUND_EVENTS.register(modEventBus);
+        STAT_TYPES.register(modEventBus);
+        CUSTOM_STATS.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -206,7 +204,6 @@ public class Main {
     public static class CommonForgeEvents {
         @SubscribeEvent
         public static void onWanderingTrades(WandererTradesEvent event) {
-            LOGGER.info("WandererTradesEvent");
             for (RegistryObject<Item> item : ModItems.ALL_CANDIES)
                 event.getGenericTrades().add(new BasicItemListing(2, new ItemStack(item.get(), 1),
                         5, 10));
@@ -277,14 +274,31 @@ public class Main {
     public static class CommonModEvents {
         @SubscribeEvent
         public static void commonSetup(@SuppressWarnings("unused") final FMLCommonSetupEvent event) {
-            LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
         }
 
         @SubscribeEvent
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-            LOGGER.info("EntityAttributeCreationEvent");
             event.put(ModEntityTypes.elfEntityType.get(), Elf.createAttributes().build());
             event.put(ModEntityTypes.reindeerEntityType.get(), Reindeer.createAttributes().build());
+        }
+
+        @SubscribeEvent
+        public static void onRegisterRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
+            event.registerBookCategories(ModRecipeBookTypes.SLEIGH_CONSTRUCTING,
+                    List.of(ModRecipeBookCategories.SLEIGH_CONSTRUCTING_MISC));
+
+            event.registerRecipeCategoryFinder(ModRecipeTypes.SLEIGH_CONSTRUCTION_TYPE.get(),
+                    (recipe) -> ModRecipeBookCategories.SLEIGH_CONSTRUCTING_MISC);
+        }
+
+        @SubscribeEvent
+        public static void onRegister(RegisterEvent event) {
+            if (Registries.CUSTOM_STAT.equals(event.getRegistryKey()))
+            {
+                ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_SLEIGH_CONSTRUCTION_TABLE, StatFormatter.DEFAULT);
+                ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_TOYSMITH_TABLE, StatFormatter.DEFAULT);
+                ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_LEATHERWORKER_TABLE, StatFormatter.DEFAULT);
+            }
         }
     }
 
@@ -301,7 +315,6 @@ public class Main {
                                                                                             Inventory pPlayerInventory,
                                                                                             Component pTitle) ->
                     new SleighConstructionTableScreen(pMenu, pPlayerInventory, pTitle, true));
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
 
         @SubscribeEvent

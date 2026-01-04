@@ -20,6 +20,7 @@
 
 package jingling_journeys.world.level.block;
 
+import jingling_journeys.stats.ModStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,9 +38,15 @@ public class ToysmithTableBlock extends CraftingTableBlock {
         super(pProperties.sound(SoundType.WOOD));
     }
 
-    public @NotNull InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos,
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand,
                                           @NotNull BlockHitResult pHit) {
-        return InteractionResult.PASS; // TODO Implement Toysmith Table Menu
+        if (pLevel.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
+            pPlayer.awardStat(ModStats.INTERACT_WITH_TOYSMITH_TABLE);
+            return InteractionResult.CONSUME;
+        }
     }
 }

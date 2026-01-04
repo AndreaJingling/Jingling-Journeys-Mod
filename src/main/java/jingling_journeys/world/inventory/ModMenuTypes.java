@@ -23,8 +23,8 @@ package jingling_journeys.world.inventory;
 import jingling_journeys.Main;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.network.IContainerFactory;
@@ -32,17 +32,17 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
     public static final RegistryObject<MenuType<SleighConstructionTableMenu>> SLEIGH_CONSTRUCTION_TABLE_MENU_SINGLE
-            = registerItemCombinerMenu((int windowId, Inventory playerInv, FriendlyByteBuf extraData) ->
+            = registerMenu((int windowId, Inventory playerInv, FriendlyByteBuf extraData) ->
             new SleighConstructionTableMenu(windowId, playerInv, extraData, ContainerLevelAccess.NULL, false),
             "sleigh_construction_table_menu_single");
     public static final RegistryObject<MenuType<SleighConstructionTableMenu>> SLEIGH_CONSTRUCTION_TABLE_MENU_EXTENDED
-            = registerItemCombinerMenu((int windowId, Inventory playerInv, FriendlyByteBuf extraData) ->
+            = registerMenu((int windowId, Inventory playerInv, FriendlyByteBuf extraData) ->
             new SleighConstructionTableMenu(windowId, playerInv, extraData, ContainerLevelAccess.NULL, true),
             "sleigh_construction_table_menu_extended");
 
     @SuppressWarnings("SameParameterValue")
-    private static <T extends ItemCombinerMenu>RegistryObject<MenuType<T>>
-    registerItemCombinerMenu(IContainerFactory<T> factory, String name) {
+    private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>>
+    registerMenu(IContainerFactory<T> factory, String name) {
         return Main.MENUS.register(name, () -> IForgeMenuType.create(factory));
     }
 

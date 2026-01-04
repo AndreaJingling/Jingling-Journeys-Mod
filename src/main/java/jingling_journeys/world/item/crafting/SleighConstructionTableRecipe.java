@@ -31,6 +31,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -40,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SleighConstructionTableRecipe implements Recipe<SimpleContainer> {
+public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> {
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
     private final ResourceLocation id;
@@ -57,13 +58,13 @@ public class SleighConstructionTableRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public boolean matches(@NotNull SimpleContainer simpleContainer, Level level) {
+    public boolean matches(@NotNull CraftingContainer container, Level level) {
         if(level.isClientSide())
             return false;
 
         for (int i = 1; i < 18; i++) {
-            ItemStack stack = simpleContainer.getItem(i);
-            if (!inputItems.get(i).test(stack)) {
+            ItemStack stack = container.getItem(i);
+            if (i >= inputItems.size() || !inputItems.get(i).test(stack)) {
                 return false;
             }
         }
@@ -72,7 +73,7 @@ public class SleighConstructionTableRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull SimpleContainer simpleContainer,
+    public @NotNull ItemStack assemble(@NotNull CraftingContainer container,
                                        @NotNull RegistryAccess registryAccess) {
         return output.copy();
     }
@@ -132,8 +133,8 @@ public class SleighConstructionTableRecipe implements Recipe<SimpleContainer> {
             String[] pattern = new String[3];
             for (int i = 0; i < 3; i++) {
                 pattern[i] = GsonHelper.convertToString(patternJson.get(i), "pattern[" + i + "]");
-                if (pattern[i].length() != 6) {
-                    throw new JsonParseException("Invalid pattern: Each row must have exactly 6 characters");
+                if (pattern[i].length() != 3 || pattern[i].length() != 6) {
+                    throw new JsonParseException("Invalid pattern: Each row must either have 3 characters or 6 characters!");
                 }
             }
 

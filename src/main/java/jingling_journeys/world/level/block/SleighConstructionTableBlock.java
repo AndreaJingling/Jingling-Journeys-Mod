@@ -20,6 +20,7 @@
 
 package jingling_journeys.world.level.block;
 
+import jingling_journeys.stats.ModStats;
 import jingling_journeys.world.inventory.SleighConstructionTableMenu;
 import jingling_journeys.world.level.block.state.properties.ModBlockStateProperties;
 import jingling_journeys.world.level.block.state.properties.SleighConstructionTableType;
@@ -44,9 +45,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class SleighConstructionTableBlock extends Block {
+public class SleighConstructionTableBlock extends CraftingTableBlock {
     private static final Component CONTAINER_TITLE =
             Component.translatable("container.jingling_journeys.sleigh_construction_table");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -105,25 +105,12 @@ public class SleighConstructionTableBlock extends Block {
         pBuilder.add(FACING).add(TYPE);
     }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
-                                          @NotNull Player pPlayer, @NotNull InteractionHand pHand,
-                                          @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            // NetworkHooks.openScreen(((ServerPlayer)pPlayer), getMenuProvider(pState, pLevel, pPos));
-            // TODO Fix Sleigh Construction Table Menu
-        }
-
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
-    }
-
     /**
      * @return the Direction pointing from the given state to its attached table component
      */
     public static Direction getConnectedDirection(BlockState p_51585_) {
         Direction direction = p_51585_.getValue(FACING);
-        return p_51585_.getValue(TYPE) == SleighConstructionTableType.MAIN ? direction.getClockWise() : direction.getCounterClockWise();
+        return p_51585_.getValue(TYPE) == SleighConstructionTableType.MAIN ? direction.getCounterClockWise() : direction.getClockWise();
     }
 
     /**
@@ -184,13 +171,24 @@ public class SleighConstructionTableBlock extends Block {
                                 == SleighConstructionTableType.EXTENSION);
     }
 
-    @Nullable
-    @SuppressWarnings("deprecation")
-    public MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
+    public @NotNull MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel,
+                                                 @NotNull BlockPos pPos) {
         return new SimpleMenuProvider((windowId, inventory, player) ->
                 new SleighConstructionTableMenu(windowId, inventory, null,
                         ContainerLevelAccess.create(pLevel, pPos), hasExtension(pState, pLevel, pPos)),
                 CONTAINER_TITLE);
+    }
+
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos,
+                                          @NotNull Player pPlayer, @NotNull InteractionHand pHand,
+                                          @NotNull BlockHitResult pHit) {
+        if (pLevel.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
+            pPlayer.awardStat(ModStats.INTERACT_WITH_SLEIGH_CONSTRUCTION_TABLE);
+            return InteractionResult.CONSUME;
+        }
     }
 
     @Override

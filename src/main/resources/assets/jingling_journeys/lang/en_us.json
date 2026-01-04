@@ -19,5 +19,9 @@
 
   "container.jingling_journeys.sleigh_construction_table": "Sleigh Construction Table",
   "container.jingling_journeys.leatherworker_table": "Leatherworker Table",
-  "container.jingling_journeys.toysmith_table": "Toysmith Table"
+  "container.jingling_journeys.toysmith_table": "Toysmith Table",
+
+  "stats.jingling_journeys.interact_with_leatherworker_table": "Interactions with Leatherworker Table",
+  "stats.jingling_journeys.interact_with_sleigh_constuction_table": "Interactions with Sleigh Construction Table",
+  "stats.jingling_journeys.interact_with_toysmith_table": "Interaction with Toysmith Table"
 }
