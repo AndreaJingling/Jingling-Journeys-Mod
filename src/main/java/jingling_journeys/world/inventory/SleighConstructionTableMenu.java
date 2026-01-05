@@ -76,7 +76,8 @@ public class SleighConstructionTableMenu extends RecipeBookMenu<CraftingContaine
         }
     }
 
-    protected static void slotChangedCraftingGrid(AbstractContainerMenu pMenu, Level pLevel, Player pPlayer, CraftingContainer pContainer, ResultContainer pResult) {
+    protected static void slotChangedCraftingGrid(AbstractContainerMenu pMenu, Level pLevel, Player pPlayer,
+                                                  CraftingContainer pContainer, ResultContainer pResult) {
         if (!pLevel.isClientSide) {
             ServerPlayer serverplayer = (ServerPlayer)pPlayer;
             ItemStack itemStack = ItemStack.EMPTY;
@@ -168,9 +169,8 @@ public class SleighConstructionTableMenu extends RecipeBookMenu<CraftingContaine
             ItemStack itemStack1 = slot.getItem();
             itemStack = itemStack1.copy();
             if (pIndex == getResultSlotIndex()) {
-                this.access.execute((p_39378_, p_39379_) -> {
-                    itemStack1.getItem().onCraftedBy(itemStack1, p_39378_, pPlayer);
-                });
+                this.access.execute((p_39378_, p_39379_) ->
+                        itemStack1.getItem().onCraftedBy(itemStack1, p_39378_, pPlayer));
                 if (!this.moveItemStackTo(itemStack1, 10, 46, true)) {
                     return ItemStack.EMPTY;
                 }
