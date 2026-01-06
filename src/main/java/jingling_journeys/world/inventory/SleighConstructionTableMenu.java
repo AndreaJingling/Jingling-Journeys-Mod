@@ -24,6 +24,7 @@ package jingling_journeys.world.inventory;
 import jingling_journeys.world.item.crafting.ModRecipeTypes;
 import jingling_journeys.world.item.crafting.SleighConstructionTableRecipe;
 import jingling_journeys.world.level.block.ModBlocks;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,12 +56,45 @@ public class SleighConstructionTableMenu extends RecipeBookMenu<CraftingContaine
         this.player = pPlayerInventory.player;
         this.craftingSlots = new TransientCraftingContainer(this, this.getGridWidth(), this.getGridHeight());
 
-        this.addSlot(new ResultSlot(pPlayerInventory.player, this.craftingSlots, this.resultSlots,
-                this.getResultSlotIndex(), 148, 35));
+        this.addSlot(new Slot(this.resultSlots, this.getResultSlotIndex(), 148, 35) {
+            @Override
+            public boolean mayPlace(@NotNull ItemStack pStack) {
+                return false;
+            }
 
-        for (int y = 0; y < this.getGridHeight(); y++) {
-            for (int x = 0; x < this.getGridWidth(); x++) {
-                int index = y + x * this.getGridHeight(); // Calculate correct slot index
+            @Override
+            public void onTake(@NotNull Player pPlayer, @NotNull ItemStack pStack) {
+                this.checkTakeAchievements(pStack);
+                NonNullList<ItemStack> nonnulllist = pPlayer.level().getRecipeManager()
+                        .getRemainingItemsFor(ModRecipeTypes.SLEIGH_CONSTRUCTION_TYPE.get(),
+                                SleighConstructionTableMenu.this.craftingSlots,
+                                pPlayer.level());
+                for(int i = 0; i < nonnulllist.size(); ++i) {
+                    ItemStack itemStack = SleighConstructionTableMenu.this.craftingSlots.getItem(i);
+                    ItemStack itemStack1 = nonnulllist.get(i);
+                    if (!itemStack.isEmpty()) {
+                        SleighConstructionTableMenu.this.craftingSlots.removeItem(i, 1);
+                        itemStack = SleighConstructionTableMenu.this.craftingSlots.getItem(i);
+                    }
+
+                    if (!itemStack1.isEmpty()) {
+                        if (itemStack.isEmpty()) {
+                            SleighConstructionTableMenu.this.craftingSlots.setItem(i, itemStack1);
+                        } else if (ItemStack.isSameItemSameTags(itemStack, itemStack1)) {
+                            itemStack1.grow(itemStack.getCount());
+                            SleighConstructionTableMenu.this.craftingSlots.setItem(i, itemStack1);
+                        } else if (!SleighConstructionTableMenu.this.player.getInventory().add(itemStack1)) {
+                            SleighConstructionTableMenu.this.player.drop(itemStack1, false);
+                        }
+                    }
+                }
+                super.onTake(pPlayer, pStack);
+            }
+        });
+
+        for (int x = 0; x < this.getGridWidth(); x++) {
+            for (int y = 0; y < this.getGridHeight(); y++) {
+                int index = y + x * 3; // Calculate correct slot index
                 this.addSlot(new Slot(this.craftingSlots, index, 8 + x * 18, 17 + y * 18));
             }
         }
@@ -171,24 +205,24 @@ public class SleighConstructionTableMenu extends RecipeBookMenu<CraftingContaine
             if (pIndex == getResultSlotIndex()) {
                 this.access.execute((p_39378_, p_39379_) ->
                         itemStack1.getItem().onCraftedBy(itemStack1, p_39378_, pPlayer));
-                if (!this.moveItemStackTo(itemStack1, 10, 46, true)) {
+                if (!this.moveItemStackTo(itemStack1, 1 + this.getSize(), 37 + this.getSize(), true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemStack1, itemStack);
-            } else if (pIndex >= this.getSize() && pIndex < 37 + this.getSize()) {
-                if (!this.moveItemStackTo(itemStack1, 1, this.getSize(), false)) {
+            } else if (pIndex >= 1 + this.getSize() && pIndex < 37 + this.getSize()) {
+                if (!this.moveItemStackTo(itemStack1, 1, 1 + this.getSize(), false)) {
                     if (pIndex < 38) {
                         if (!this.moveItemStackTo(itemStack1, 29 + this.getSize(),
                                 37 + this.getSize(), false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if (!this.moveItemStackTo(itemStack1, this.getSize(), 29 + this.getSize(),
+                    } else if (!this.moveItemStackTo(itemStack1, 1 + this.getSize(), 29 + this.getSize(),
                             false)) {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (!this.moveItemStackTo(itemStack1, this.getSize(), 37 + this.getSize(),
+            } else if (!this.moveItemStackTo(itemStack1, 1 + this.getSize(), 37 + this.getSize(),
                     false)) {
                 return ItemStack.EMPTY;
             }

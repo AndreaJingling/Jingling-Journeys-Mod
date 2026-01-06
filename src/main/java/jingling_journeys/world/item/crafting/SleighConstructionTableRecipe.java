@@ -20,13 +20,11 @@
 
 package jingling_journeys.world.item.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import jingling_journeys.Main;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -35,21 +33,30 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> {
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
     private final ResourceLocation id;
+    private final boolean isExtended;
 
-    public SleighConstructionTableRecipe(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id) {
+    public SleighConstructionTableRecipe(NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id,
+                                         boolean isExtended) {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
+        this.isExtended = isExtended;
+    }
+
+    public boolean isExtended() {
+        return this.isExtended;
     }
 
     @Override
@@ -62,7 +69,7 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
         if(level.isClientSide())
             return false;
 
-        for (int i = 1; i < 18; i++) {
+        for (int i = 1; i < (isExtended ? 18 : 9); i++) {
             ItemStack stack = container.getItem(i);
             if (i >= inputItems.size() || !inputItems.get(i).test(stack)) {
                 return false;
@@ -70,6 +77,12 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
         }
 
         return true;
+    }
+
+    @Override
+    public boolean isIncomplete() {
+        List<Ingredient> ingredients = isExtended ? this.getIngredients() : this.getIngredients().subList(0, 9);
+        return ingredients.isEmpty() || ingredients.stream().anyMatch(ForgeHooks::hasNoElements);
     }
 
     @Override
@@ -84,8 +97,8 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int i1) {
-        return true;
+    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+        return pWidth >= (this.isExtended ? 6 : 3);
     }
 
     @Override
@@ -127,14 +140,17 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
         public @NotNull SleighConstructionTableRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
             JsonArray patternJson = GsonHelper.getAsJsonArray(json, "pattern");
             if (patternJson.size() != 3) {
-                throw new JsonParseException("Invalid pattern: Expected exactly 3 rows, but got " + patternJson.size());
+                throw new JsonSyntaxException("Invalid pattern: Expected exactly 3 rows, but got " + patternJson.size());
             }
 
             String[] pattern = new String[3];
+            boolean isExtended = true;
             for (int i = 0; i < 3; i++) {
                 pattern[i] = GsonHelper.convertToString(patternJson.get(i), "pattern[" + i + "]");
-                if (pattern[i].length() != 3 || pattern[i].length() != 6) {
-                    throw new JsonParseException("Invalid pattern: Each row must either have 3 characters or 6 characters!");
+                isExtended = isExtended && pattern[i].length() == 6;
+                if (pattern[i].length() != 3 && pattern[i].length() != 6 && pattern[0].length() != pattern[i].length()) {
+                    throw new JsonSyntaxException("Invalid pattern: All rows must either have 3 characters or" +
+                            " all rows must have 6 characters!");
                 }
             }
 
@@ -144,7 +160,7 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
             for (Map.Entry<String, JsonElement> entry : keyJson.entrySet()) {
                 String keyCharStr = entry.getKey();
                 if (keyCharStr.length() != 1) {
-                    throw new JsonParseException("Invalid key entry: '" + keyCharStr + "' is not a single character");
+                    throw new JsonSyntaxException("Invalid key entry: '" + keyCharStr + "' is not a single character");
                 }
                 char symbol = keyCharStr.charAt(0);
                 Ingredient ingredient = Ingredient.fromJson(entry.getValue());
@@ -154,22 +170,22 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
 
             NonNullList<Ingredient> ingredients = NonNullList.withSize(18, Ingredient.EMPTY);
             for (int row = 0; row < 3; row++) {
-                for (int col = 0; col < 6; col++) {
+                for (int col = 0; col < (isExtended ? 6 : 3); col++) {
                     char symbol = pattern[row].charAt(col);
                     // Allow spaces to represent an empty slot.
                     Ingredient ingredient = symbol == ' ' ? Ingredient.EMPTY : key.get(symbol);
                     if (ingredient == null) {
-                        throw new JsonParseException("Pattern references symbol '" + symbol
+                        throw new JsonSyntaxException("Pattern references symbol '" + symbol
                                 + "' which is not defined in the key");
                     }
-                    ingredients.set(row * 6 + col, ingredient);
+                    ingredients.set(row + col * 3, ingredient);
                 }
             }
 
             JsonObject resultJson = GsonHelper.getAsJsonObject(json, "result");
             ItemStack result = ShapedRecipe.itemStackFromJson(resultJson);
 
-            return new SleighConstructionTableRecipe(ingredients, result, id);
+            return new SleighConstructionTableRecipe(ingredients, result, id, isExtended);
         }
 
         @Override
@@ -179,7 +195,8 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
             inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));
 
             ItemStack output = buf.readItem();
-            return new SleighConstructionTableRecipe(inputs, output, id);
+            boolean isExtended = buf.readBoolean();
+            return new SleighConstructionTableRecipe(inputs, output, id, isExtended);
         }
 
         @Override
@@ -189,7 +206,9 @@ public class SleighConstructionTableRecipe implements Recipe<CraftingContainer> 
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.getResultItem(null), false);
+            buf.writeItemStack(recipe.getResultItem(
+                    RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY)), false);
+            buf.writeBoolean(recipe.isExtended());
         }
     }
 }
