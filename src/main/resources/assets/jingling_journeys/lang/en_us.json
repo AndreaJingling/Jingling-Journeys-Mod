@@ -25,5 +25,7 @@
 
   "stat.jingling_journeys.interact_with_leatherworker_table": "Interactions with Leatherworker Table",
   "stat.jingling_journeys.interact_with_sleigh_constuction_table": "Interactions with Sleigh Construction Table",
-  "stat.jingling_journeys.interact_with_toysmith_table": "Interactions with Toysmith Table"
+  "stat.jingling_journeys.interact_with_toysmith_table": "Interactions with Toysmith Table",
+  "stat.jingling_journeys.sleigh_one_cm": "Distance by Sleigh",
+  "stat.jingling_journeys.reindeer_one_cm": "Distance by Reindeer"
 }

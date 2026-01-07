@@ -298,6 +298,8 @@ public class Main {
                 ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_SLEIGH_CONSTRUCTION_TABLE, StatFormatter.DEFAULT);
                 ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_TOYSMITH_TABLE, StatFormatter.DEFAULT);
                 ModStats.registerCustomStat(event, ModStats.INTERACT_WITH_LEATHERWORKER_TABLE, StatFormatter.DEFAULT);
+                ModStats.registerCustomStat(event, ModStats.SLEIGH_ONE_CM, StatFormatter.DISTANCE);
+                ModStats.registerCustomStat(event, ModStats.REINDEER_ONE_CM, StatFormatter.DISTANCE);
             }
         }
     }

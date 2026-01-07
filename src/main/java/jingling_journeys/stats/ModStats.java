@@ -14,11 +14,15 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModStats {
     public static final ResourceLocation INTERACT_WITH_SLEIGH_CONSTRUCTION_TABLE
-            = makeCustomStat("interact_with_sleigh_constructioon_table");
+            = makeCustomStat("interact_with_sleigh_construction_table");
     public static final ResourceLocation INTERACT_WITH_TOYSMITH_TABLE
             = makeCustomStat("interact_with_toysmith_table");
     public static final ResourceLocation INTERACT_WITH_LEATHERWORKER_TABLE
             = makeCustomStat("interact_with_leatherworker_table");
+    public static final ResourceLocation SLEIGH_ONE_CM
+            = makeCustomStat("sleigh_one_cm");
+    public static final ResourceLocation REINDEER_ONE_CM
+            = makeCustomStat("reindeer_one_cm");
 
     private static RegistryObject<StatType<?>> registerRegistryType(String id, Registry<?> registry) {
         return Main.STAT_TYPES.register(id, () -> new StatType<>(registry));
