@@ -7,6 +7,7 @@
   "item.jingling_journeys.example_wrapped_candy": "Example Wrapped Candy",
   "item.jingling_journeys.generic_small_sled": "Generic Small Sled",
   "item.jingling_journeys.elf_spawn_egg": "Elf Spawn Egg",
+  "item.jingling_journeys.reindeer_spawn_egg": "Reindeer Spawn Egg",
 
   "block.jingling_journeys.sleigh_construction_table": "Sleigh Construction Table",
   "block.jingling_journeys.leatherworker_table": "Leatherworker Table",
@@ -15,13 +16,14 @@
   "block.jingling_journeys.chimney": "Chimney",
 
   "entity.jingling_journeys.elf": "Elf",
+  "entity.jingling_journeys.reindeer": "Reindeer",
   "entity.jingling_journeys.generic_small_sled": "Generic Small Sled",
 
   "container.jingling_journeys.sleigh_construction_table": "Sleigh Construction Table",
   "container.jingling_journeys.leatherworker_table": "Leatherworker Table",
   "container.jingling_journeys.toysmith_table": "Toysmith Table",
 
-  "stats.jingling_journeys.interact_with_leatherworker_table": "Interactions with Leatherworker Table",
-  "stats.jingling_journeys.interact_with_sleigh_constuction_table": "Interactions with Sleigh Construction Table",
-  "stats.jingling_journeys.interact_with_toysmith_table": "Interaction with Toysmith Table"
+  "stat.jingling_journeys.interact_with_leatherworker_table": "Interactions with Leatherworker Table",
+  "stat.jingling_journeys.interact_with_sleigh_constuction_table": "Interactions with Sleigh Construction Table",
+  "stat.jingling_journeys.interact_with_toysmith_table": "Interactions with Toysmith Table"
 }
