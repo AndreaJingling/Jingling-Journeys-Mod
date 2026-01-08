@@ -1,0 +1,22 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 10487412,
+    "separation": 15,
+    "spacing": 75
+  },
+  "structures": [
+    {
+      "structure": "jingling_journeys:pen_plains",
+      "weight": 1
+    },
+    {
+      "structure": "jingling_journeys:pen_snowy",
+      "weight": 1
+    },
+    {
+      "structure": "jingling_journeys:pen_taiga",
+      "weight": 1
+    }
+  ]
+}
