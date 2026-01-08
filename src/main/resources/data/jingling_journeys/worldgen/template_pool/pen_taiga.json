@@ -4,9 +4,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "jingling_journeys:pens/taiga",
-        "processors": {
-          "processors": []
-        },
+        "processors": "minecraft:mossify_10_percent",
         "projection": "rigid"
       },
       "weight": 1
