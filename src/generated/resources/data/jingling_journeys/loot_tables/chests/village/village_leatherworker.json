@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather",
+          "quality": 4,
+          "weight": 50
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wheat",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beef",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:red_dye",
+          "weight": 15
+        }
+      ],
+      "rolls": 15.0
+    }
+  ],
+  "random_sequence": "jingling_journeys:chests/village/village_leatherworker"
+}

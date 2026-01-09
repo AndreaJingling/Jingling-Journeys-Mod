@@ -1,6 +1,6 @@
 /**
  *         Jingling Journeys (WIP description)<br>
- *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
+ *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         <br>
  *         This file part of Jingling Journeys.<br>
  *         <br>
@@ -62,6 +62,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -120,6 +122,12 @@ public class Main {
             DeferredRegister.create(ForgeRegistries.STAT_TYPES, Main.MOD_ID);
     public static final DeferredRegister<ResourceLocation> CUSTOM_STATS =
             DeferredRegister.create(Registries.CUSTOM_STAT, Main.MOD_ID);
+    public static final DeferredRegister<Structure> STRUCTURES =
+            DeferredRegister.create(Registries.STRUCTURE, Main.MOD_ID);
+    public static final DeferredRegister<StructureSet> STRUCTURE_SETS =
+            DeferredRegister.create(Registries.STRUCTURE_SET, Main.MOD_ID);
+    public static final DeferredRegister<StructureTemplatePool> TEMPLATE_POOLS =
+            DeferredRegister.create(Registries.TEMPLATE_POOL, Main.MOD_ID);
 
 
     static {

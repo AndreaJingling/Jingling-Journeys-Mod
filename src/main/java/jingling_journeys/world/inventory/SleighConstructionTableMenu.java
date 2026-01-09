@@ -1,6 +1,6 @@
 /**
  *         Jingling Journeys (WIP description)<br>
- *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
+ *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         Copyright (C) diesieben07<br>
  *         <br>
  *         This file part of Jingling Journeys.<br>

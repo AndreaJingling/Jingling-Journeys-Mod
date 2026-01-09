@@ -1,6 +1,6 @@
 /**
  *         Jingling Journeys (WIP description)<br>
- *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
+ *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         <br>
  *         This file part of Jingling Journeys.<br>
  *         <br>
@@ -30,8 +30,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public class JinglingJourneysLootTables extends BlockLootSubProvider {
-    public JinglingJourneysLootTables() {
+public class JinglingJourneysBlockLootTables extends BlockLootSubProvider {
+    public JinglingJourneysBlockLootTables() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 

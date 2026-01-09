@@ -1,6 +1,6 @@
 /**
  *         Jingling Journeys (WIP description)<br>
- *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
+ *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         <br>
  *         This file part of Jingling Journeys.<br>
  *         <br>
@@ -20,7 +20,9 @@
 
 package jingling_journeys.data;
 
-import jingling_journeys.data.loot.JinglingJourneysLootTables;
+import jingling_journeys.data.loot.JinglingJourneysBlockLootTables;
+import jingling_journeys.data.loot.JinglingJourneysChestLootTables;
+import jingling_journeys.data.loot.JinglingJourneysEntityLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -30,7 +32,12 @@ import java.util.Set;
 
 public class ModLootTableProvider {
     public static LootTableProvider create(PackOutput packOutput) {
-        return new LootTableProvider(packOutput, Set.of(), List.of(new LootTableProvider
-                .SubProviderEntry(JinglingJourneysLootTables::new, LootContextParamSets.BLOCK)));
+        return new LootTableProvider(packOutput, Set.of(), List.of(
+                new LootTableProvider
+                        .SubProviderEntry(JinglingJourneysBlockLootTables::new, LootContextParamSets.BLOCK),
+                new LootTableProvider
+                        .SubProviderEntry(JinglingJourneysEntityLootTables::new, LootContextParamSets.ENTITY),
+                new LootTableProvider
+                        .SubProviderEntry(JinglingJourneysChestLootTables::new, LootContextParamSets.CHEST)));
     }
 }

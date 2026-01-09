@@ -1,6 +1,6 @@
 /**
  *         Jingling Journeys (WIP description)<br>
- *         Copyright (C) 2025  Jingling Journeys Team (WIP name)<br>
+ *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         <br>
  *         This file part of Jingling Journeys.<br>
  *         <br>
@@ -20,10 +20,8 @@
 
 package jingling_journeys.client.renderer.entity;
 
-import jingling_journeys.client.model.entity.ElflikeModel;
 import jingling_journeys.client.model.entity.ReindeerModel;
 import jingling_journeys.world.entity.animal.Reindeer;
-import jingling_journeys.world.entity.npc.Elflike;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
