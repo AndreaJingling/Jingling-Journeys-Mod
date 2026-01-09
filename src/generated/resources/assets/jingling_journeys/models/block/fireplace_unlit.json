@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "down": "jingling_journeys:block/fireplace_unlit_top",
+    "east": "jingling_journeys:block/fireplace_unlit_side2",
+    "north": "jingling_journeys:block/fireplace_unlit_side1",
+    "south": "jingling_journeys:block/fireplace_unlit_side3",
+    "up": "jingling_journeys:block/fireplace_unlit_bottom",
+    "west": "jingling_journeys:block/fireplace_unlit_side4"
+  }
+}

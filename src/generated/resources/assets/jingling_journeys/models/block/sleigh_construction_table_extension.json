@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "down": "jingling_journeys:block/sleigh_construction_table_extension_bottom",
+    "east": "jingling_journeys:block/sleigh_construction_table_extension_side2",
+    "north": "jingling_journeys:block/sleigh_construction_table_extension_side1",
+    "south": "jingling_journeys:block/sleigh_construction_table_extension_side3",
+    "up": "jingling_journeys:block/sleigh_construction_table_extension_top",
+    "west": "jingling_journeys:block/sleigh_construction_table_extension_side4"
+  }
+}

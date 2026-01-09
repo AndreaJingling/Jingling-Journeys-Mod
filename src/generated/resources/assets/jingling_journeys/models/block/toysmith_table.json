@@ -1,13 +1,12 @@
 {
-  "parent": "minecraft:block/cube_directional",
+  "parent": "minecraft:block/cube",
   "render_type": "minecraft:translucent",
   "textures": {
-    "particle": "jingling_journeys:block/toysmith_table_top",
-    "up": "jingling_journeys:block/toysmith_table_top",
     "down": "jingling_journeys:block/toysmith_table_bottom",
-    "north": "jingling_journeys:block/toysmith_table_side1",
     "east": "jingling_journeys:block/toysmith_table_side2",
+    "north": "jingling_journeys:block/toysmith_table_side1",
     "south": "jingling_journeys:block/toysmith_table_side3",
+    "up": "jingling_journeys:block/toysmith_table_top",
     "west": "jingling_journeys:block/toysmith_table_side4"
   }
 }

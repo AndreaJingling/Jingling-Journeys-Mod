@@ -36,6 +36,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder exampleWrappedCandy;
     private ItemModelBuilder sharpenedCandyCane;
     private ItemModelBuilder genericSmallSled;
+    private ItemModelBuilder elfSpawnEgg;
+    private ItemModelBuilder reindeerSpawnEgg;
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Main.MOD_ID, existingFileHelper);
@@ -47,6 +49,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         exampleWrappedCandy = simpleItem(ModItems.EXAMPLE_WRAPPED_CANDY);
         sharpenedCandyCane = simpleItem(ModItems.SHARPENED_CANDY_CANE);
         genericSmallSled = simpleItem(ModItems.GENERIC_SMALL_SLED);
+        assert ModItems.ELF_SPAWN_EGG.getId() != null;
+        elfSpawnEgg = withExistingParent(ModItems.ELF_SPAWN_EGG.getId().getPath(),
+                ResourceLocation.parse("item/template_spawn_egg"));
+        assert ModItems.REINDEER_SPAWN_EGG.getId() != null;
+        reindeerSpawnEgg = withExistingParent(ModItems.REINDEER_SPAWN_EGG.getId().getPath(),
+                ResourceLocation.parse("item/template_spawn_egg"));
     }
 
     // HELPER METHODS

@@ -57,9 +57,10 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModStructureTagsProvider(packOutput, lookupProvider,
                 existingFileHelper));
 
+        generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput));
+
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput));
     }
 }

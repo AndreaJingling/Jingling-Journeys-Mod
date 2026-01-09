@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "jingling_journeys:block/chimney_connection_ends",
+    "side": "jingling_journeys:block/chimney_connection_sides",
+    "top": "jingling_journeys:block/chimney_top"
+  }
+}
