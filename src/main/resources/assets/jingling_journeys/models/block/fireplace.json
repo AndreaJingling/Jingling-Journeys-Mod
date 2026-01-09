@@ -2,6 +2,7 @@
   "parent": "minecraft:block/cube_all",
   "render_type": "minecraft:translucent",
   "textures": {
+    "particle": "jingling_journeys:block/fireplace",
     "all": "jingling_journeys:block/fireplace"
   }
 }

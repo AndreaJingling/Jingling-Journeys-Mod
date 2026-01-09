@@ -2,6 +2,7 @@
   "parent": "minecraft:block/cube_directional",
   "render_type": "minecraft:translucent",
   "textures": {
+    "particle": "jingling_journeys:block/leatherworker_table_top",
     "up": "jingling_journeys:block/leatherworker_table_top",
     "down": "jingling_journeys:block/leatherworker_table_bottom",
     "north": "jingling_journeys:block/leatherworker_table_side1",
