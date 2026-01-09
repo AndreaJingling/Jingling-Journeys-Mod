@@ -22,6 +22,7 @@
 package jingling_journeys.data;
 
 import jingling_journeys.Main;
+import jingling_journeys.world.item.ModItems;
 import jingling_journeys.world.level.block.FireplaceBlock;
 import jingling_journeys.world.level.block.ModBlocks;
 import jingling_journeys.world.level.block.state.properties.ChimneyType;
@@ -149,6 +150,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         horizontalBlock(ModBlocks.LEATHERWORKER_TABLE.get(), leatherworkerTableModelFile);
         horizontalBlock(ModBlocks.TOYSMITH_TABLE.get(), toysmithTableModelFile);
+        simpleBlockItem(ModBlocks.LEATHERWORKER_TABLE.get(), leatherworkerTableModelFile);
+        simpleBlockItem(ModBlocks.TOYSMITH_TABLE.get(), toysmithTableModelFile);
         getVariantBuilder(ModBlocks.CHIMNEY.get())
                 .partialState().with(ModBlockStateProperties.CHIMNEY_TYPE, ChimneyType.TOP)
                 .modelForState().modelFile(topChimneyModelFile).addModel()
@@ -158,33 +161,5 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalBlock(ModBlocks.FIREPLACE.get(), (blockState) ->
                 blockState.getValue(BlockStateProperties.LIT) ? litFireplaceModelFile : unlitFireplaceModelFile);
         simpleBlockItem(ModBlocks.FIREPLACE.get(), unlitFireplaceModelFile);
-    }
-
-    // HELPER METHODS
-    @SuppressWarnings({"SameParameterValue", "unused"})
-    private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
-    }
-
-    @SuppressWarnings({"SameParameterValue", "unused"})
-    private void blockItemWithExistingModel(RegistryObject<Block> blockRegistryObject, ResourceLocation modelLocation) {
-        simpleBlockWithItem(blockRegistryObject.get(),
-                new ModelFile.ExistingModelFile(modelLocation, models().existingFileHelper));
-    }
-
-    @SuppressWarnings({"SameParameterValue", "unused"})
-    private void translucentBlockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(), ((BlockModelBuilder) cubeAll(blockRegistryObject.get()))
-                .renderType("translucent"));
-    }
-
-    @SuppressWarnings({"SameParameterValue", "unused"})
-    private void simpleItem(RegistryObject<Block> blockRegistryObject) {
-        assert blockRegistryObject.getId() != null;
-        itemModels()
-                .withExistingParent(blockRegistryObject.getId().getPath(),
-                        ResourceLocation.parse("item/generated"))
-                .texture("layer0",
-                        ResourceLocation.tryBuild(Main.MOD_ID, "item/" + blockRegistryObject.getId().getPath()));
     }
 }

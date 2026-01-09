@@ -36,7 +36,7 @@ import java.util.function.BiConsumer;
 public class JinglingJourneysChestLootTables implements LootTableSubProvider {
     @Override
     public void generate(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> pOutput) {
-        pOutput.accept(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "chests/village/village_leatherworker"),
+        pOutput.accept(ResourceLocation.fromNamespaceAndPath(Main.MOD_ID, "chests/village/village_leatherworker_house"),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(15.0f))

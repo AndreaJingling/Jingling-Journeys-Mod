@@ -28,17 +28,17 @@
   ],
   "render_type": "translucent",
   "textures": {
-    "up_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "down_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "north_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "east_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "south_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "west_main": "jingling_journeys:block/sleigh_construction_table_main",
-    "up_extension": "jingling_journeys:block/sleigh_construction_table_extension",
-    "down_extension": "jingling_journeys:block/sleigh_construction_table_extension",
-    "north_extension": "jingling_journeys:block/sleigh_construction_table_extension",
-    "east_extension": "jingling_journeys:block/sleigh_construction_table_extension",
-    "south_extension": "jingling_journeys:block/sleigh_construction_table_extension",
-    "west_extension": "jingling_journeys:block/sleigh_construction_table_extension"
+    "up_main": "jingling_journeys:block/sleigh_construction_table_main_top",
+    "down_main": "jingling_journeys:block/sleigh_construction_table_main_bottom",
+    "north_main": "jingling_journeys:block/sleigh_construction_table_main_side1",
+    "east_main": "jingling_journeys:block/sleigh_construction_table_main_side2",
+    "south_main": "jingling_journeys:block/sleigh_construction_table_main_side3",
+    "west_main": "jingling_journeys:block/sleigh_construction_table_main_side4",
+    "up_extension": "jingling_journeys:block/sleigh_construction_table_extension_top",
+    "down_extension": "jingling_journeys:block/sleigh_construction_table_extension_bottom",
+    "north_extension": "jingling_journeys:block/sleigh_construction_table_extension_side1",
+    "east_extension": "jingling_journeys:block/sleigh_construction_table_extension_side2",
+    "south_extension": "jingling_journeys:block/sleigh_construction_table_extension_side3",
+    "west_extension": "jingling_journeys:block/sleigh_construction_table_extension_side4"
   }
 }
