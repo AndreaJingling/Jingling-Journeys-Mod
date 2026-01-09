@@ -1,5 +1,6 @@
 /**
- *         Jingling Journeys (WIP description)<br>
+ *         Jingling Journeys - Give your Minecraft World a little Festive Cheer, Sleigh Riding Fun, and 
+ *         The Spirit of the Season.<br>
  *         Copyright (C) 2025-2026  Jingling Journeys Team<br>
  *         Copyright (C) diesieben07<br>
  *         <br>
