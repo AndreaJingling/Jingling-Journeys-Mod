@@ -32,8 +32,7 @@ version = mod_version
 group = mod_group_id
 base.archivesName = mod_id
 
-// Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println("Java: ${providers.systemProperty("java.version").get()}, " +
         "JVM: ${providers.systemProperty("java.vm.version").get()} (${providers.systemProperty("java.vendor").get()}), " +
